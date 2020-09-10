@@ -19,6 +19,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # Local App 
+    'users.apps.UsersConfig', # Users app
+
+
+
+
+    # Built in App
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,3 +124,12 @@ STATICFILES_DIRS = [
 
 # Location of static files for the production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# New Authentication Model
+AUTH_USER_MODEL = 'users.User'
+
+
+# Image Upload
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
