@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- Stylesheet Links -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    <!-- Title Block -->
+    <title>
+      {% block title %}
+        Home Page
+      {% endblock title %}
+    </title>
+
+    
+  </head>
+  <body>
+    <!-- Top Bar -->
+
+    <!-- Logo, Sign In, Create -->
+    <div class="d-flex" style="background-color: palegoldenrod;">
+      <div class="m-2">
+        <a href="#">
+          One Step For
+          <img width="30" height="30" src="{% static 'images/Flag_of_Nepal.png' %}" alt="Nepal" />
+        </a>
+      </div>
+      <div class="ml-auto m-2">
+        <a href="#">Create</a>
+      </div>
+      <div class="m-2">
+        <a href="#">Sign In</a>
+      </div>
+    </div>
+
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <!-- Branding -->
+      <a href="#" class="navbar-brand">
+        <!-- Image of Nepal -->
+        <img width="30" height="30" src="{% static 'images/Flag_of_Nepal.png' %}" alt="" />
+        One Step
+      </a>
+
+      <!-- Toggle Button -->
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#mymenu"
+      >
+        <span class="navbar-toggler-icon"> </span>
+      </button>
+
+      <!-- Nav -->
+      <div class="collapse navbar-collapse" id="mymenu">
+        <ul class="navbar-nav ml-auto">
+          <!-- Home Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Home
+            </a>
+          </li>
+
+          <!-- Note Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Note
+            </a>
+          </li>
+
+          <!-- Ask Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Ask Us
+            </a>
+          </li>
+
+          <!-- Flash Card Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Flash Card
+            </a>
+          </li>
+
+          <!-- Test Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Test
+            </a>
+          </li>
+
+          <!-- Bootcamp Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Boot Camp
+            </a>
+          </li>
+
+          <!-- Meetus Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Meet Us
+            </a>
+          </li>
+
+          <!-- Discussion Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Discusion
+            </a>
+          </li>
+
+          <!-- Read Button -->
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              Read Nepal
+            </a>
+          </li>
+
+          <!-- Learning Resources Button
+                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        Resources
+                    </a>
+                </li> -->
+
+          <!-- Opputunities In Nepal -->
+          <!-- <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        Oppurtunity
+                    </a>
+                </li> -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Classess -->
+    <!-- <div
+      id="classsix"
+      class="d-flex flex-wrap align-content-center justify-content-center position-sticky fixed-top"
+    >
+      <a href="#">
+        Note
+      </a>
+      <a href="#">
+        Question
+      </a>
+      <a href="#">
+        Test
+      </a>
+      <a href="#">
+        Ask
+      </a>
+      <a href="#">
+            Resource
+        </a>
+    </div> -->
+
+    <!-- Recommended Post 2 -->
+    <!-- <div class="container mt-4"> -->
+      <!-- <h3>Book Of the Month</h3>
+        <div class="row">
+            <div class="col d-flex" style="background-color: tomato; height: 300px;">
+
+                <div class="col-6" style="background-color: red; height: 300px;">
+                        <h1>Image</h1>
+                </div>
+
+                <div class="col-6" style="background-color: palegoldenrod; height: 300px;">
+                    <p>Name:</p>
+                    <p>Rating:</p>
+                </div>
+
+            </div>
+        </div> -->
+
+      <!-- Recommended Post -->
+      <!-- <h5>Post Of the Day</h5>
+      <div class="row justify-content-center">
+        <div
+          class="col-md-5 m-4"
+          style="background-color: seagreen; height: 200px;"
+        >
+          Post 1 Worth Reading
+        </div>
+
+        <div
+          class="col-md-5 m-4"
+          style="background-color: teal; height: 200px;"
+        >
+          Post 2 Worth Reading
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <h2>Post</h2> -->
+    <!-- <div class="container">
+      <div class="row justify-content-center">
+        <div
+          class="col-md-5 m-4"
+          style="background-color: royalblue; height: 200px;"
+        >
+          FIrst Post
+        </div>
+        <div
+          class="col-md-5 m-4"
+          style="background-color: saddlebrown; height: 200px;"
+        >
+          Second Post
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Body Block -->
+      {% block body %}
+        
+      {% endblock body %}
+
+    
+
+    <hr />
+
+    <!-- Footer -->
+
+    <!-- All the other options -->
+    <div class="container">
+      <div class="row justify-content-center align-item-center">
+        <div class="col-sm-12" id="otherOption">
+          <a href="#" class="ml-4">Log In</a>
+          <a href="#" class="ml-4">Create Post</a>
+          <a href="#" class="ml-4">Note</a>
+          <a href="#" class="ml-4">Flash Card</a>
+          <a href="#" class="ml-4">Ask</a>
+          <a href="#" class="ml-4">Take Test</a>
+          <a href="#" class="ml-4">Boot camp</a>
+          <a href="#" class="ml-4">Meet US</a>
+          <a href="#" class="ml-4">Create Flash Card</a>
+          <a href="#" class="ml-4">Submit Question</a>
+          <a href="#" class="ml-4">Learning Resources</a>
+          <a href="#" class="ml-4">Oppurtunity</a>
+          <a href="#" class="ml-4">After SEE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Pages -->
+    <div
+      id="socialmediaFooter"
+      class="d-flex flex-wrap mt-4 align-content-center justify-content-center"
+    >
+      <a href="#">
+        Facebook Group
+      </a>
+      <a href="#">
+        Facebook Page
+      </a>
+      <a href="#">
+        Twitter
+      </a>
+      <a href="#">
+        Linkedin
+      </a>
+      <a href="#">
+        Youtube
+      </a>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+#oneStepForNepal {
+    background-color: #a5b4d4;
+    height: 1.2cm;
+    font-size: 30px;
+    text-align: center;
+    color: royalblue
+}
+
+a.nav-link:hover {
+    border-bottom: 1px solid red;
+    /* color: tomato; */
+    /* background-color: #a1acbf; */
+}
+
+#classsix a {
+    margin: 10px;
+    display: inline-block;
+    /* border: 1px solid beige; */
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    /* border-radius: 15%; */
+    background-color: whitesmoke;
+    /* width: 2cm; */
+    text-align: center;
+    /* height: 1cm; */
+    font-size: 14px;
+    border-radius: 14px;
+}
+
+#classsix a:hover {
+    /* color: rebeccapurple; */
+    background-color: #b5aeae;
+}
+
+#classsix {
+    background-color: silver;
+    margin: 0px;
+}
+
+#socialmediaFooter{
+    background-color: slategrey;
+}
+
+#socialmediaFooter a{
+    color: white;
+    text-decoration: none;
+    margin: auto;
+}
+
+#socialmediaFooter a:hover{
+    background-color: blue;
+}
+
+#otherOption a {
+    color: rgb(49, 187, 169);
+    text-decoration: none;
+}
+
+#otherOption a:hover{
+    color: rgb(96, 37, 204);
+}
