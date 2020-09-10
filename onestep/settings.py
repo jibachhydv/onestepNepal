@@ -21,7 +21,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     # Local App 
-    'users', # Users app
+    'users.apps.UsersConfig', # Users app
 
 
 
@@ -124,3 +124,7 @@ STATICFILES_DIRS = [
 
 # Location of static files for the production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# New Authentication Model
+AUTH_USER_MODEL = 'users.User'
