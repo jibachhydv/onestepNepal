@@ -22,8 +22,11 @@ INSTALLED_APPS = [
 
     # Local App 
     'users.apps.UsersConfig', # Users app
+    'note.apps.NoteConfig', # Note app
 
 
+    # Third Party App
+    'django_summernote', # Django Summer Note
 
 
     # Built in App
@@ -103,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -133,3 +136,8 @@ AUTH_USER_MODEL = 'users.User'
 # Image Upload
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
+
+
+# Summer Note Setting
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_THEME = 'bs4'  # theme of Bootstrap4
