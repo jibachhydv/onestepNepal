@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import reverse
+from django.core.exceptions import ValidationError
 
 
 class User(AbstractUser):
@@ -68,7 +69,7 @@ class User(AbstractUser):
         blank=True
     )
 
-    schoolType = models.CharField(max_length=200, choices=faculty)
+    schoolType = models.CharField(max_length=200, choices=faculty, blank=True)
 
     schoolName = models.CharField(max_length=100,
                                   blank=True)
@@ -76,7 +77,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=200,
                                blank=True)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
     USERNAME_FIELD = 'email'
 
     def __str__(self):
@@ -86,3 +87,19 @@ class User(AbstractUser):
         return reverse('profile', args=[
             self.pk,
         ])
+
+
+class Follower(models.Model):
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('follower', 'following')
+
+    def clean(self):
+        if self.follower == self.following:
+            raise ValidationError("One Cannot follow themselves")
+
+    def __str__(self):
+        return '%s follows %s' % (self.follower, self.following)
+

@@ -128,3 +128,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # New Authentication Model
 AUTH_USER_MODEL = 'users.User'
+
+
+# Image Upload
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
