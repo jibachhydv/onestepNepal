@@ -1,3 +1,154 @@
-<h1>
-    Note Detail
-</h1>
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <!-- Post -->
+    <div class="container mt-5" style="max-width: 750px;">
+      <!-- Post Title -->
+      <div class="row ml-2 mr-2" style="background-color: ;">
+        <h1>
+          <!-- Post title -->
+          {{ note.title }}
+        </h1>
+      </div>
+
+      <hr />
+
+      <!-- Second Row Post Writer -->
+      <div class="row mt-5 ml-2 mr-2" style="background-color: ;">
+        <!-- Post Writer Image Avatar and detail info -->
+        <div class="col-12 col-md-7" style="background-color: ;">
+          <div class="row">
+            <!-- Image Avatar -->
+            <div class="col-3">
+              <img src="{{ note.author.photo.url }}" alt="userName" class="avatar" />
+            </div>
+
+            <!-- Post Writer Detail -->
+            <div class="col-9">
+              <div style="color: #292929; font-size: 16px;">
+                <!-- Post Writer Name -->
+                {{ note.author.first_name }} {{ note.author.last_name}}
+                <button
+                  class="ml-3 d-none d-sm-inline mt-1 btn btn-outline-primary btn-sm"
+                >
+                  Follow
+                </button>
+              </div>
+              <div
+                style="
+                  font-size: 16px;
+                  color: #757575;
+                  line-height: 20px;
+                  font-style: normal;
+                  font-weight: 300;
+                "
+              >
+                <!-- Post published Date -->
+                Nov 1, 2018
+              </div>
+              <div style="
+                  font-size: 16px;
+                  color: #757575;
+                  line-height: 20px;
+                  font-style: normal;
+                  font-weight: 300;
+                ">
+                  <!-- Reading Time -->
+                  5 mins
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post Share Buttons Column -->
+        <div class="col mt-3 offset-md-0" style="background-color: ;">
+          <!-- Share: Font Awesome Icon
+                Yet To Implement -->
+        </div>
+      </div>
+
+      <div
+        class="row m-2 mt-0 d-flex flex-wrap justify-content-around"
+        style="background-color: rgb(141, 148, 144); color: white;"
+      >
+        <div class="">100 <a href="#">Upvote</a></div>
+        <div class="">20 <a href="#">Downvote</a></div>
+        <div class="">
+          10 Comment
+        </div>
+        <div class="">
+          110 Views
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Post Content RichText  -->
+      <div class="row ml-2 mt-3 mr-2" style="background-color: ;">
+        {{ note.content|safe }}
+      </div>
+
+      <hr />
+      <h3>Comment</h3>
+      <!-- All Comment -->
+      <div class="row m-2">
+            <!-- Commentor photo -->
+            <div class="col-1" style="background-color: ;">
+                <img src="geeta.jpeg" alt="" class="commentAvatar" />
+            </div>
+
+            <div class="col ml-4" style="">
+                <div>
+                    <a href="#">Geeta yadav</a>
+                </div>
+                <div style="background-color: gray;" class="p-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quasi placeat, ea maiores sed cupiditate repellat adipisci. Rem aut libero voluptate illo sed itaque nihil perferendis? Ratione architecto magnam molestias.
+                </div>
+                <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-info">Upvote</button>
+                    <button class="btn btn-sm btn-outline-warning">Downnote</button>
+                    <button class="btn btn-sm btn-outline-danger">Report</button>
+                </div>
+            </div>
+      </div>
+
+      <div class="row m-2">
+            <!-- Commentor photo -->
+            <div class="col-1" style="background-color: ;">
+                <img src="geeta.jpeg" alt="" class="commentAvatar" />
+            </div>
+
+            <div class="col ml-4" style="">
+                <div>
+                    <a href="#">Geeta yadav</a>
+                </div>
+                <div style="background-color: gray;" class="p-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quasi placeat, ea maiores sed cupiditate repellat adipisci. Rem aut libero voluptate illo sed itaque nihil perferendis? Ratione architecto magnam molestias.
+                </div>
+                <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-info">Upvote</button>
+                    <button class="btn btn-sm btn-outline-warning">Downnote</button>
+                    <button class="btn btn-sm btn-outline-danger">Report</button>
+                </div>
+            </div>
+      </div>
+
+
+      <!-- Comment Form -->
+      <div class="row m-2">
+        <!-- Add New Comment Form -->
+        <div class="col-1">
+          <img src="geeta.jpeg" alt="" class="commentAvatar" />
+        </div>
+        <div class="col ml-4">
+            <div class="form-group">
+                    <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment ..."></textarea>
+            </div>
+            <button class="btn btn-sm">Add Comment</button>
+          </div>
+        </div>
+      </div>
+
+{% endblock body %}

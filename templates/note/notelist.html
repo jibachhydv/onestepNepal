@@ -1,3 +1,18 @@
-<h1>
-    Note List
-</h1>
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 750px;">
+        <ul>
+            {% for note in notes %}
+                <li>
+                    <h2>
+                        <a href="{% url 'notedetail' note.pk %}">
+                            {{ note.title }}
+                        </a>
+                    </h2>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

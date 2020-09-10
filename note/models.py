@@ -5,6 +5,9 @@ from django.urls import reverse
 
 from django.template.defaultfilters import slugify
 
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
+
 # Create your models here.
 
 class PublishedManager(models.Manager):
@@ -100,12 +103,8 @@ class Note(models.Model):
         super(Note, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('note:note_detail', args=[
+        return reverse('notedetail', args=[
             self.pk,
-            self.grade,
-            self.subject,
-            self.slug,
-
         ])
     
     # return number of likes

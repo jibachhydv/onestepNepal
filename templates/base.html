@@ -83,7 +83,7 @@
 
           <!-- Note Button -->
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{% url 'notelist' %}" class="nav-link">
               Note
             </a>
           </li>
@@ -247,7 +247,7 @@
       <div class="row justify-content-center align-item-center">
         <div class="col-sm-12" id="otherOption">
           <a href="#" class="ml-4">Log In</a>
-          <a href="#" class="ml-4">Create Post</a>
+          <a href="{% url 'newnote'%}" class="ml-4">Create Note</a>
           <a href="#" class="ml-4">Note</a>
           <a href="#" class="ml-4">Flash Card</a>
           <a href="#" class="ml-4">Ask</a>

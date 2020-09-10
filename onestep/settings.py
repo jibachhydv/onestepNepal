@@ -141,3 +141,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
 # Summer Note Setting
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SUMMERNOTE_THEME = 'bs4'  # theme of Bootstrap4
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+    }
+}
+
+login_url = '/login/'

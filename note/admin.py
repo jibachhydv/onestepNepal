@@ -10,4 +10,4 @@ class NoteAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
 
 
-admin.site.register(Note)
+admin.site.register(Note,NoteAdmin)

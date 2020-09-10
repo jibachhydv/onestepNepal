@@ -60,3 +60,20 @@ a.nav-link:hover {
 #otherOption a:hover{
     color: rgb(96, 37, 204);
 }
+
+
+/* Image Avatar */
+.avatar {
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+
+.commentAvatar {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
