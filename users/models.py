@@ -76,6 +76,9 @@ class User(AbstractUser):
     address = models.CharField(max_length=200,
                                blank=True)
 
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
+
     def __str__(self):
         return f"{self.first_name} + {self.last_name} +({self.email})"
 
