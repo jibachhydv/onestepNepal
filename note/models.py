@@ -84,6 +84,9 @@ class Note(models.Model):
     # Subject Choice
     subject = models.CharField(max_length=25, choices=subject_choices)
 
+    # Views Count
+    views = models.PositiveIntegerField(blank=False, default=0)
+
 
     # Likes 
     likes = models.ManyToManyField(User, related_name='likedpost', blank=True)
@@ -111,3 +114,6 @@ class Note(models.Model):
     # return number of likes
     def numberOfLikes(self):
         return self.likes.all().count()
+    
+    def increaseView(self):
+        self.views = self.views + 1

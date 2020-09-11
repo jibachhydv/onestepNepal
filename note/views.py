@@ -24,7 +24,19 @@ class NoteDetail(DetailView):
     model = Note
     context_object_name = 'note'
     template_name = 'note/notedetail.html'
+
+"""    
+def notedetail(request, pk, slug):
+
+    try:
+        note = Note.objects.get(id=pk, slug=slug)
+    except Note.DoesNotExist:
+        return HttpResponse("Such Note Doesnot exist")
     
+    return render(request, 'note/notedetail.html', {
+        'note': note,
+    })
+"""
 
 @login_required()
 def createNote(request):
