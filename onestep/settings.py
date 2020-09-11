@@ -148,4 +148,5 @@ SUMMERNOTE_CONFIG = {
     }
 }
 
-login_url = '/login/'
+LOGIN_URL = '/login/'
+

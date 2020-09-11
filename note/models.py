@@ -67,7 +67,7 @@ class Note(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notes')
 
     # Content
-    content = models.TextField()
+    content = models.TextField(blank=False)
 
     # publish
     publish = models.DateTimeField(default=timezone.now)
@@ -79,14 +79,15 @@ class Note(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
 
     # Grade targeted
-    grade = models.CharField(max_length=20, choices=grade_choices, default='General')
+    grade = models.CharField(max_length=20, choices=grade_choices)
 
     # Subject Choice
-    subject = models.CharField(max_length=25, choices=subject_choices, default='General')
+    subject = models.CharField(max_length=25, choices=subject_choices)
 
 
     # Likes 
     likes = models.ManyToManyField(User, related_name='likedpost', blank=True)
+
     class Meta:
         ordering = ('-publish',)
 
