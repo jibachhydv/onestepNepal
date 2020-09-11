@@ -35,3 +35,9 @@ def login(request):
 def logout(request):
     account_logout(request)
     return HttpResponseRedirect(reverse("homepage"))
+
+
+# Password Change
+
+# Password reset
+
