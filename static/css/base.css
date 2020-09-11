@@ -60,3 +60,12 @@ a.nav-link:hover {
 #otherOption a:hover{
     color: rgb(96, 37, 204);
 }
+
+
+
+/* Profile image css */
+.user-image {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}

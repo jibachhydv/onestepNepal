@@ -8,6 +8,8 @@ from django.contrib.auth import logout as account_logout
 
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetCompleteView
 
+from .models import User
+
 def homepage(request):
     return render(request, 'base.html')
 
@@ -63,3 +65,17 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'account/password_reset_complete.html'
+
+
+# Profile
+def profile(request,id):
+    
+    try:
+        user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+        return HttpResponse("No Such User")
+    
+    return render(request, 'profile/profile.html', {
+        'user': user
+    })
+    

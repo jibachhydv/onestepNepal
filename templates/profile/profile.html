@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ user.first_name }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4" style="background-color: whitesmoke;">
+
+        <!-- User Photo Section -->
+        <div class="row">
+            <img src="{{ user.photo.url }}" style="border-radius: 50%; height: 200px; width: 200px;" class="img-fluid user-image mx-auto d-block img-thumbnail">
+        </div>
+
+        
+
+        <!-- Name row -->
+        <div class="row mt-2">
+            <h2 class="mr-auto ml-auto">
+                {{ user.first_name }} {{ user.last_name }}
+            </h2>
+        </div>
+
+        <!-- Hobby row -->
+        <div class="row">
+            <p class="ml-auto mr-auto">
+                {{ user.hobby }}
+            </p>
+        </div>
+
+        <!-- Number of Followers -->
+        <div class="row">
+            <h5 class="mr-auto ml-auto">
+                20 Followers
+            </h5>
+        </div>
+
+        <!-- Follow UnFollow Button Row -->
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-outline-info mr-5">Follow</button>
+                <!-- <button class="btn btn-outline-primary mr-5">Unfollow</button> -->
+                <button class="btn btn-outline-warning">Thanks</button>
+            </div>
+        </div>
+        
+        <hr>
+        <h1 style="text-align: center;">User Posts and Questions</h1>
+        <!-- User Posts and Questions -->
+        <div class="row">
+            <div class="col-sm-12 col-md-6 order-sm-last order-md-first" >
+                <h1 class="d-inline">Post</h1>
+                <button class="btn btn-sm btn-outline-success ml-3">All Post</button>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 1</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 2</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 3</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 4</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 5</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 6</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 7</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 8</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 9</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Post 10</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col">
+                <h1 class="d-inline">Question</h1>
+                <a class="btn btn-sm btn-outline-success ml-3" href="#">All Questions</a>
+
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 1</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 2</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 3</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 4</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 5</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 6</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 7</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 8</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 9</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Question 10</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
