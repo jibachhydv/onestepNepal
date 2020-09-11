@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.contrib.auth import login as account_login
 from django.contrib.auth import logout as account_logout
 
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetCompleteView
+
 def homepage(request):
     return render(request, 'base.html')
 
@@ -38,6 +40,26 @@ def logout(request):
 
 
 # Password Change
+class PasswordChangeView(PasswordChangeView):
+    template_name = 'account/passwordchange.html'
 
-# Password reset
+# Password Change Done
+class PasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'account/passwordchangedone.html'
 
+# Password reset view
+class PasswordResetView(PasswordResetView):
+    template_name = 'account/password_reset_email.html'
+
+# Password Reset Done View
+class PasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'account/password_reset_done.html'
+
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'account/password_reset_confirm.html'
+    extra_context = {
+        
+    }
+
+class PasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'account/password_reset_complete.html'
