@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse
 
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Note
 
@@ -13,19 +13,22 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import NewNoteForm
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+
+
 
 class NoteList(ListView):
     model = Note
     context_object_name = 'notes'
     template_name = 'note/notelist.html'
 
-class NoteDetail(DetailView):
+""" class NoteDetail(DetailView):
     model = Note
     context_object_name = 'note'
     template_name = 'note/notedetail.html'
 
-"""    
+    """
+
 def notedetail(request, pk, slug):
 
     try:
@@ -36,7 +39,7 @@ def notedetail(request, pk, slug):
     return render(request, 'note/notedetail.html', {
         'note': note,
     })
-"""
+
 
 @login_required()
 def createNote(request):
@@ -57,3 +60,31 @@ def createNote(request):
     return render(request, 'note/newnote.html', {
         'form': form
     })
+
+class NoteUpdateView(UpdateView, LoginRequiredMixin):
+    model = Note
+    template_name = 'note/noteupdate.html'
+    form_class = NewNoteForm
+    
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+
+        if obj.author != self.request.user:
+            raise Http404("You are not allowed to edit this Post")
+        return super(NoteUpdateView, self).dispatch(request, *args, **kwargs)
+
+@login_required
+def noteDelete(request, pk, slug):
+
+    try:
+        note = Note.objects.get(pk=pk, slug=slug)
+    except Note.DoesNotExist:
+        return HttpResponse("Such Post Doesnot exist")
+        
+    if request.user != note.author:
+        return Http404("You are not allowed to delete the post")
+        
+    note.delete()
+    return HttpResponseRedirect(reverse('notelist'))
+    
+    

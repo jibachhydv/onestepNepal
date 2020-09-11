@@ -10,6 +10,20 @@
           <!-- Post title -->
           {{ note.title }}
         </h1>
+        {% if note.author == request.user %}
+          <p class="ml-5">
+            
+            <a class="btn btn-sm btn-outline-info mr-2" href="{% url 'noteupdate' note.id note.slug %}">
+              Update
+            </a>
+
+            <form action="{% url 'notedelete' note.id note.slug %}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete" onclick="return confirm('Do you want to delete the post?')">
+            </form>
+
+          </p>
+        {% endif %}
       </div>
 
       <hr />
@@ -21,7 +35,12 @@
           <div class="row">
             <!-- Image Avatar -->
             <div class="col-3">
-              <img src="{{ note.author.photo.url }}" alt="userName" class="avatar" />
+              {% if note.author.photo %}
+                <img src="{{ note.author.photo.url }}" alt="userName" class="avatar" />
+              {% else %}
+                <!-- Add the user photo -->
+                hello
+              {% endif %}
             </div>
 
             <!-- Post Writer Detail -->

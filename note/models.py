@@ -109,6 +109,7 @@ class Note(models.Model):
     def get_absolute_url(self):
         return reverse('notedetail', args=[
             self.pk,
+            self.slug,
         ])
     
     # return number of likes

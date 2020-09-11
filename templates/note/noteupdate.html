@@ -1,3 +1,18 @@
-<h1>
-    Note Update
-</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+    Update Note
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Update Note</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Note" />
+        </form>
+    </div>
+    
+{% endblock body %}

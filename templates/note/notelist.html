@@ -7,7 +7,7 @@
             {% for note in notes %}
                 <li>
                     <h2>
-                        <a href="{% url 'notedetail' note.pk %}">
+                        <a href="{% url 'notedetail' note.pk note.slug %}">
                             {{ note.title }}
                         </a>
                     </h2>
