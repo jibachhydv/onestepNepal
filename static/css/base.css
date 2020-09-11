@@ -68,7 +68,7 @@ a.nav-link:hover {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-  }
+}
 
 
 .commentAvatar {
@@ -76,4 +76,11 @@ a.nav-link:hover {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+/* Profile image css */
+.user-image {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
 }
