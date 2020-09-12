@@ -41,9 +41,10 @@ def notedetail(request, pk, slug):
         note = Note.objects.get(id=pk, slug=slug)
     except Note.DoesNotExist:
         return HttpResponse("Such Note Doesnot exist")
-    
+    comments = note.comments.all()
     return render(request, 'note/notedetail.html', {
         'note': note,
+        'comments': comments,
     })
 
 
@@ -93,5 +94,10 @@ def noteDelete(request, pk, slug):
     note.status = 'draft'
     note.save()
     return HttpResponseRedirect(reverse('notelist'))
-    
-    
+
+
+@login_required
+def newcomment(request):
+
+    if request.method == "POST":
+        comment = request.POST.get['newcomment']
