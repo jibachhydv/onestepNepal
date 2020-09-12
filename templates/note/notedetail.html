@@ -47,7 +47,7 @@
             <div class="col-9">
               <div style="color: #292929; font-size: 16px;">
                 <!-- Post Writer Name -->
-                <a href="{% url 'profile' note.author.id %}">
+                <a href="{% url 'profile' note.author.username note.author.id %}">
                   {{ note.author.fullname }}
                 </a>
                 
@@ -124,7 +124,7 @@
 
               <div class="col ml-4" style="">
                   <div>
-                      <a href="{% url 'profile' comment.comment_by.id %}">
+                      <a href="{% url 'profile' comment.comment_by.username comment.comment_by.id %}">
                               {{ comment.comment_by.fullname }}
                        </a>
                   </div>
