@@ -47,7 +47,10 @@
             <div class="col-9">
               <div style="color: #292929; font-size: 16px;">
                 <!-- Post Writer Name -->
-                {{ note.author.first_name }} {{ note.author.last_name}}
+                <a href="{% url 'profile' note.author.id %}">
+                  {{ note.author.fullname }}
+                </a>
+                
                 <button
                   class="ml-3 d-none d-sm-inline mt-1 btn btn-outline-primary btn-sm"
                 >
@@ -121,7 +124,9 @@
 
               <div class="col ml-4" style="">
                   <div>
-                      <a href="#">{{ comment.comment_by.first_name }}</a>
+                      <a href="{% url 'profile' comment.comment_by.id %}">
+                              {{ comment.comment_by.fullname }}
+                       </a>
                   </div>
                   <div style="background-color: gray;" class="p-1">
                     {{ comment.comment }}

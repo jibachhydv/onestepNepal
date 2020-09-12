@@ -87,6 +87,9 @@ class User(AbstractUser):
         return reverse('profile', args=[
             self.pk,
         ])
+    
+    def fullname(self):
+        return f'{self.first_name.capitalize()} {self.last_name.capitalize()}'
 
 
 class Follower(models.Model):
