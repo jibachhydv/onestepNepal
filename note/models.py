@@ -118,3 +118,18 @@ class Note(models.Model):
     
     def increaseView(self):
         self.views = self.views + 1
+
+
+class Comment(models.Model):
+
+    # comment on which post
+    post = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+
+    # Comment
+    comment = models.TextField()
+
+    # Time
+    comment_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment[:50]

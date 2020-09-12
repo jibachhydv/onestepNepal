@@ -22,6 +22,12 @@ class NoteList(ListView):
     context_object_name = 'notes'
     template_name = 'note/notelist.html'
 
+def notelist(request):
+    notes = Note.published.all()
+    return render(request, 'note/notelist.html', {
+        'notes': notes,
+    })
+
 """ class NoteDetail(DetailView):
     model = Note
     context_object_name = 'note'
@@ -84,7 +90,8 @@ def noteDelete(request, pk, slug):
     if request.user != note.author:
         return Http404("You are not allowed to delete the post")
         
-    note.delete()
+    note.status = 'draft'
+    note.save()
     return HttpResponseRedirect(reverse('notelist'))
     
     
