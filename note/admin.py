@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Note
+from .models import Note, Comment
 
 
 from django_summernote.admin import SummernoteModelAdmin
@@ -11,3 +11,6 @@ class NoteAdmin(SummernoteModelAdmin):
 
 
 admin.site.register(Note,NoteAdmin)
+
+
+admin.site.register(Comment)

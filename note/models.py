@@ -123,13 +123,16 @@ class Note(models.Model):
 class Comment(models.Model):
 
     # comment on which post
-    post = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='comments')
 
     # Comment
     comment = models.TextField()
 
     # Time
     comment_time = models.DateTimeField(auto_now_add=True)
+
+    # Comment By
+    comment_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment')
 
     def __str__(self):
         return self.comment[:50]
