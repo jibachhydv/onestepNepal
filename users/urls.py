@@ -30,5 +30,5 @@ urlpatterns = [
     path('reset/done/',
             auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     # Profile
-    path('profile/<int:id>/', views.profile, name='profile')
+    path('profile/<str:username>-<int:id>/', views.profile, name='profile')
 ]
