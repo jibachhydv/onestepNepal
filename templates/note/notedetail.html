@@ -119,10 +119,10 @@
         <div class="row m-2">
               <!-- Commentor photo -->
               <div class="col-1" style="background-color: ;">
-                  <img src="" alt="" class="commentAvatar" />
+                  <img src="{{ comment.comment_by.photo.url }}" alt="{{ comment.comment_by.fullname }}" class="commentAvatar" />
               </div>
 
-              <div class="col ml-4" style="">
+              <div class="col ml-4">
                   <div>
                       <a href="{% url 'profile' comment.comment_by.username comment.comment_by.id %}">
                               {{ comment.comment_by.fullname }}
@@ -134,7 +134,12 @@
                   <div class="mt-1">
                       <button class="btn btn-sm btn-outline-info">Upvote</button>
                       <button class="btn btn-sm btn-outline-warning">Downnote</button>
-                      <button class="btn btn-sm btn-outline-danger">Report</button>
+                      {% if comment.comment_by == request.user %}
+                        <form action="{% url 'deletecomment' comment.pk %}" method="post" class="d-inline">
+                          {% csrf_token %}
+                          <input class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete the comment?')" type="submit" value="Delete">
+                        </form>
+                      {% endif %}
                   </div>
               </div>
         </div>
@@ -158,11 +163,11 @@
             <img src="geeta.jpeg" alt="" class="commentAvatar" />
           </div>
           <div class="col ml-4">
-            <form action="" method="post">
+            <form action="{% url 'newcomment' note.id %}" method="post">
               {% csrf_token %}
               <div class="form-group">
                 <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                <textarea class="form-control" id="newcommenttextArea" rows="3" placeholder="Comment ..."></textarea>
+                <textarea class="form-control" name='newcomment' id="newcommenttextArea" rows="3" placeholder="Comment ..."></textarea>
               </div>
               <button class="btn btn-sm">Add Comment</button>
             </form>

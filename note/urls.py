@@ -8,4 +8,10 @@ urlpatterns = [
     path('new/', views.createNote , name='newnote'),
     path('update/<int:pk>-<slug:slug>/', views.NoteUpdateView.as_view(), name='noteupdate'),
     path('delete/<int:pk>-<slug:slug>/', views.noteDelete, name='notedelete'),
+
+    # New Comment Add
+    path('addcomment/<int:noteid>/', views.newcomment, name='newcomment'),
+
+    # Delete Comment
+    path('deletecomment-<int:commentid>/', views.deletecomment, name='deletecomment'),
 ]

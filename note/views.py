@@ -1,9 +1,9 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from .models import Note
+from .models import Note, Comment
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -97,7 +97,22 @@ def noteDelete(request, pk, slug):
 
 
 @login_required
-def newcomment(request):
+def newcomment(request, noteid):
 
     if request.method == "POST":
-        comment = request.POST.get['newcomment']
+        comment = request.POST.get('newcomment')
+        note = Note.objects.get(pk=noteid)
+        user = request.user
+        Comment.objects.create(post=note, comment_by=user, comment=comment)
+        return redirect(request.META['HTTP_REFERER'])
+    
+@login_required
+def deletecomment(request, commentid):
+
+    try:
+        comment = Comment.objects.get(pk=commentid)
+    except Comment.DoesNotExist or Comment.MultipleObjectsReturned:
+        raise Http404("Not allowded")
+
+    comment.delete()
+    return redirect(request.META['HTTP_REFERER'])
