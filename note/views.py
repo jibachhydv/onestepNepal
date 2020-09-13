@@ -101,6 +101,8 @@ def newcomment(request, noteid):
 
     if request.method == "POST":
         comment = request.POST.get('newcomment')
+        if (comment == ''):
+            return redirect(request.META['HTTP_REFERER'])
         note = Note.objects.get(pk=noteid)
         user = request.user
         Comment.objects.create(post=note, comment_by=user, comment=comment)

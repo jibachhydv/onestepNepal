@@ -160,7 +160,7 @@
         <div class="row m-2">
           <!-- Add New Comment Form -->
           <div class="col-1">
-            <img src="geeta.jpeg" alt="" class="commentAvatar" />
+            <img src="{{ request.user.photo.url }}" alt="{{ request.user.fullname }}" class="commentAvatar" />
           </div>
           <div class="col ml-4">
             <form action="{% url 'newcomment' note.id %}" method="post" id="addcommentform">
