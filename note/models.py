@@ -53,7 +53,7 @@ class Note(models.Model):
         ('cs', 'Computer Science'),
         ('account', 'Account'),
         ('business', 'Business'),
-        ('marketin', 'Marketing'),
+        ('marketing', 'Marketing'),
         ('general', 'General'),
     )
 

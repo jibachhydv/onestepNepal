@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ question.title }}
+ {% endblock %} 
+
+
+{% block body %}
+
+    <div class="container mt-5" style="max-width: 750px">
+      <!-- Question/Discussin Title -->
+      <h1>
+          {{ question.title }}
+      </h1>
+
+      <!-- first row -->
+      <div class="d-flex flex-row row mt-4">
+        <!-- Photo -->
+        <div class="col-1 mr-3" style="background-color: ">
+          <!-- Image of Author -->
+          <img
+            src="{{ question.askedby.photo.url }}"
+            alt="{{ question.askedby.fullname }}"
+            style="
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              vertical-align: middle;
+            "
+          />
+        </div>
+
+        <!-- Information -->
+        <div class="col-5 ml-4">
+          <div class="row">
+            <!-- Author full Name -->
+            <a href="" style="color: red">
+                {{ question.askedby.fullname }}
+            </a>
+          </div>
+          <div class="row">
+            <span style="font-size: 12px"> 8 months ago in &ThinSpace; </span>
+            <a
+              href=""
+              style="color: #3ca8e7; font-size: small; text-decoration: none"
+            >
+              CS50x- General
+            </a>
+          </div>
+        </div>
+
+        <!-- Extra Information -->
+        <div class="col" style="background-color: ">
+          <div class="d-flex flex-row">
+            <span
+              style="font-family: Arial, Helvetica, sans-serif; font-size: 18px"
+              >
+              {{ question.views }}
+              </span
+            >
+          </div>
+          <div class="d-flex flex-row">
+            <span style="font-size: 12px; text-align: center"> VIEWS </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row mt-4">
+        <div class="col">
+      
+        </div>
+        <div class="col-11">
+          <!-- Question Detail-->
+          <div class="row">
+            {{ question.detail|safe }}
+          </div>
+
+          
+          <div class="row mt-5">
+            <button class="btn btn-sm btn-outline-info">Add Comment</button>
+          </div>
+
+          <!-- Form for commenting -->
+          <div class="row mt-3">
+            <form action="" method="post">
+              <input type="text" />
+              <input type="button" value="Cancel">
+              <input type="submit" value="Post" />
+            </form>
+          </div>
+
+
+          <!-- Comment on Discussion -->
+          {% for answer in question.answers_ondiscussion.all %}
+           <div class="row mt-3">
+            <div class="col-1 mr-3 mr-md-0">
+              <!-- Image of Author -->
+              <img
+                src="{{ answer.answered_by.photo.url }}"
+                alt="{{ answer.answered_by.fullname }}"
+                style="
+                  border-radius: 50%;
+                  width: 30px;
+                  height: 30px;
+                  vertical-align: middle;
+                "
+              />
+            </div>
+
+            <div class="col ml-2">
+              <!-- Author full Name -->
+              <div class="row">
+                <a href="" style="color: red"> {{ answer.answered_by.fullname }} </a>
+              </div>
+              <div class="row">
+                {{ answer.answer|safe }}
+              </div>
+            </div>
+          </div>
+          {% empty %}
+            <h1>
+                No Answer Yet
+            </h1>
+
+          {% endfor %}
+
+          
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

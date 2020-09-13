@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Discussion
+{% endblock %}
+
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 750px; background-color: ;"> 
+        <div class="row">
+            {% for question in questions %}
+                    <div class="col-12 col-sm-6 mt-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a href="{% url 'questiondetail' question.id %}" style="color: #c52929;">
+                                        {{ question.title }}
+                                    </a>
+                                    
+                                    <br>
+                                    <span style="color: #c52929;">
+                                        <a href="">
+                                            #{{ question.subject }}
+                                        </a>
+                                    </span>
+
+                                    <span style="color: #c52929;">
+                                        <a href="">
+                                            #{{ question.grade }}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

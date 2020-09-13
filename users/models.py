@@ -7,24 +7,33 @@ from django.core.exceptions import ValidationError
 class User(AbstractUser):
     # Grade Choices
     grade_choices = (
-        ('1-5', 'One to Five'),
-        ('6', 'Six'),
-        ('7', 'Seven'),
-        ('8', 'Eight'),
-        ('9', 'Nine'),
-        ('10', 'Ten'),
-        ('11', 'Eleven'),
-        ('12', 'Twelve'),
-        ('HA', 'Health Assistant'),
-        ('Diploma in Engineering', 'Diploma'),
-        ('Bachelor in CSIT', 'Bachelor in CSIT'),
-        ('Bachelor in Agriculture', 'Bachelor in Agriculture'),
+        ('One to Five', 'One to Five'),
+        ('Six', 'Six'),
+        ('Seven', 'Seven'),
+
+        ('Eight', 'Eight'),
+        ('Nine', 'Nine'),
+        ('Ten', 'Ten'),
+
+        ('Eleven', 'Eleven'),
+        ('Twelve', 'Twelve'),
+
+        ('HA', 'Health Assitant'),
+        ('Staff Nurse', 'Staff Nurse'),
+
         ('Diploma in Agriculture', 'Diploma in Agriculture'),
-        ('Bachelor in Engineering', 'Bachelor in Engineering'),
-        ('Bachelor in Education', 'Bachelor in Education'),
-        ('Bachelor in Commerce', 'Bachelor in Commerce'),
-        ('BSC Nursing', 'Bachelor in Nursing'),
+        ('Diploma in Engineering', 'Diploma in Engineering'),
+
+
+
         ('Bachelor in CSIT', 'Bachelor in CSIT'),
+        ('BSC Nursing', 'BSC Nursing'),
+        ('Bachelor in Education', 'Bachelor in Education'),
+        ('Bachelor in Engineering', 'Bachelor in Engineering'),
+        ('BBS', 'BBS'),
+        ('BBA', 'BBA'),
+        ('MBBS', 'MBBS'),
+        
         ('General', 'General'),
     )
 
