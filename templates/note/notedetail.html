@@ -163,13 +163,13 @@
             <img src="geeta.jpeg" alt="" class="commentAvatar" />
           </div>
           <div class="col ml-4">
-            <form action="{% url 'newcomment' note.id %}" method="post">
+            <form action="{% url 'newcomment' note.id %}" method="post" id="addcommentform">
               {% csrf_token %}
               <div class="form-group">
                 <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
                 <textarea class="form-control" name='newcomment' id="newcommenttextArea" rows="3" placeholder="Comment ..."></textarea>
               </div>
-              <button class="btn btn-sm">Add Comment</button>
+              <button class="btn btn-sm" type="submit">Add Comment</button>
             </form>
             </div>
           </div>
@@ -182,4 +182,18 @@
       </div>
     {% endif %}
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log(document.getElementById('addcommentform'))
+        form = document.getElementById('addcommentform')
+        form.addEventListener('submit', (event) => {
+          if (document.getElementById('newcommenttextArea').value == '') {
+            console.log("Empty form cannot be submiited")
+            document.getElementById('newcommenttextArea').style.border = '1px solid red';
+            event.preventDefault();
+          } 
+          
+        })
+      })
+    </script>
 {% endblock body %}
