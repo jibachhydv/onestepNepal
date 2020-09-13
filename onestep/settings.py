@@ -24,6 +24,9 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig', # Users app
     'note.apps.NoteConfig', # Note app
 
+    # Discussion App
+    'discussion.apps.DiscussionConfig',
+
 
     # Third Party App
     'django_summernote', # Django Summer Note
