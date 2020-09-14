@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+
+{% block body %}
+    <div class="container" style="max-width: 750px;">
+
+
+        <h1 style="text-align: center;">
+            Sign Up 
+        </h1>
+
+        <form action="{% url 'signup' %}" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div>
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" autocomplete="fdskhiu">
+            </div>
+            
+            <div>
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName">
+            </div>
+            
+            <div>
+                <label for="lastName">LastName</label>
+                <input type="text" name="lastName" id="lastName">
+            </div>
+
+            <div>
+                <label for="password1">Password</label>
+                <input type="password" name="password1" id="password1">
+            </div>
+
+            <div>
+                <label for="password2">Confirm Password</label>
+                <input type="password" name="password2" id="password2">
+            </div>
+
+            <div>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+            </div>
+
+            <div>
+                <input type="file" name="profilePicture" id="profilepicture" accept="image/x-png,image/gif,image/jpeg">
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-sm btn-outline-info">Create Account</button>
+            </div>
+
+
+        </form>
+
+    </div>
+
+    
+
+
+{% endblock body %}
