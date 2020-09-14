@@ -96,6 +96,9 @@ def profile(request,id):
 # User registration
 def signup(request):
 
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('homepage'))
+
     if request.method == 'GET':
         return render(request, 'registration/signup.html')
 
