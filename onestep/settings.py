@@ -157,4 +157,11 @@ LOGOUT_URL = 'logout'
 
 
 # Email Backend
+EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jibachhydv18@gmail.com'
+EMAIL_HOST_PASSWORD = 'hplaptop12'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
