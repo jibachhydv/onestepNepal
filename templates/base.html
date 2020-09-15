@@ -231,6 +231,16 @@
       </div>
     </div> -->
 
+
+    <!-- Search Box -->
+    <div class="mt-5 ml-5">
+      <form action="{% url '' %}" method="post">
+        {% csrf_token%}
+        <input type="text" name="search" id="search">
+        <input type="submit" value="Search">
+      </form>
+    </div>
+
     <!-- Body Block -->
       {% block body %}
         
