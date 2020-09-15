@@ -19,3 +19,4 @@ def questiondetail(request, id):
     return render(request, 'discussion/questiondetail.html', {
         'question': question
     })
+
