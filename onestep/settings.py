@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # Third Party App
     'django_summernote', # Django Summer Note
 
+    'crispy_forms', # django-crispy-forms
 
     # Built in App
     'django.contrib.admin',
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

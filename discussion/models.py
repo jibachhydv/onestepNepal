@@ -2,6 +2,10 @@ from django.db import models
 
 from users.models import User
 
+from django.template.defaultfilters import slugify
+
+from django.shortcuts import reverse
+
 # Create your models here.
 class Discussion(models.Model):
 
@@ -60,6 +64,10 @@ class Discussion(models.Model):
     # Title of the question
     title = models.CharField(max_length=500, blank=False, verbose_name='Title')
 
+    # Slug of the title
+    slug = models.SlugField(verbose_name='Slug Fields', max_length=550)
+
+
     # Grade of Question
     grade = models.CharField(max_length=100, verbose_name='Class', blank=False, choices=grade_choices)
 
@@ -93,6 +101,17 @@ class Discussion(models.Model):
     def changeanswerStatus(self):
         self.answered_status = not(self.answered_status)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Discussion, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            'questiondetail', args = [
+                self.pk,
+                self.slug,
+            ]
+        )
 
 class Answer(models.Model):
 

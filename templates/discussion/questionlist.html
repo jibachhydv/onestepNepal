@@ -5,15 +5,29 @@
     Discussion
 {% endblock %}
 
+{% load crispy_forms_tags %}
 
 {% block body %}
+
     <div class="container mt-5" style="max-width: 750px; background-color: ;"> 
+        <!-- Form for asking question -->
+
+        <div class="row">
+            <form action="{% url 'askquestion' %}" method="GET">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-sm btn-outline-success" value="Ask Question">
+            </form>
+        </div>
+       
+
+        
+
         <div class="row">
             {% for question in questions %}
                     <div class="col-12 col-sm-6 mt-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="{% url 'questiondetail' question.id %}" style="color: #c52929;">
+                                    <a href="{% url 'questiondetail' question.id question.slug %}" style="color: #c52929;">
                                         {{ question.title }}
                                     </a>
                                     
