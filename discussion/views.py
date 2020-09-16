@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Discussion
 from django.http import Http404
-from .forms import AskForm
+from .forms import AskForm, QuestionAnswer
 
 # Create your views here.
 
@@ -22,7 +22,8 @@ def questiondetail(request,slug,id):
         raise Http404("Do Such Question Exist")
 
     return render(request, 'discussion/questiondetail.html', {
-        'question': question
+        'question': question,
+        'questionanswerform': QuestionAnswer(),
     })
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -42,7 +43,7 @@ def askquestion(request):
             title = form.cleaned_data['title']
             grade = form.cleaned_data['grade']
             subject = form.cleaned_data['subject']
-            detail = form.cleaned_data['question']
+            detail = form.cleaned_data['detail']
             askedby = request.user
 
 
@@ -76,3 +77,45 @@ class QuestionUpdateView(UpdateView, LoginRequiredMixin):
         if obj.askedby != self.request.user:
             raise Http404("You are not allowed to edit this Post")
         return super(QuestionUpdateView, self).dispatch(request, *args, **kwargs)
+
+from .models import Answer
+
+@login_required
+def newanswer(request, questionid):
+
+    if request.method == "POST":
+        form = QuestionAnswer(request.POST)
+
+        if form.is_valid():
+
+            answer = form.cleaned_data['answer']
+            print(answer)
+
+            # save the answer
+            Answer.objects.create(answered_by=request.user, answer_on=Discussion.objects.get(pk=questionid), answer=answer)
+
+            return redirect(request.META['HTTP_REFERER'])
+
+from django.shortcuts import reverse
+
+@login_required
+def deletequestion(request, id):
+
+    try:
+        question = Discussion.objects.get(pk=id)
+    except Discussion.DoesNotExist or Discussion.MultipleObjectsReturned:
+        raise Http404("Not Allowded")
+
+    question.delete()
+    return HttpResponseRedirect(reverse('allquestions'))
+
+   
+@login_required
+def deleteanswer(request, answerid):
+
+    try:
+        answer = Answer.objects.get(pk=answerid)
+    except Answer.DoesNotExist or Answer.MultipleObjectsReturned:
+        raise Http404("Not allowded")
+    answer.delete()
+    return redirect(request.META['HTTP_REFERER'])

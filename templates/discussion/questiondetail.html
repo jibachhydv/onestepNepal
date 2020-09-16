@@ -4,6 +4,8 @@
     {{ question.title }}
  {% endblock %} 
 
+{% load crispy_forms_tags %}
+
 
 {% block body %}
 
@@ -12,6 +14,17 @@
       <h1>
           {{ question.title }}
       </h1>
+      {% if question.askedby == request.user %}
+            <a class="btn btn-sm btn-outline-info mr-2" href="{% url 'updatequestion' question.id question.slug %}">
+              Update
+            </a>
+            <form action="{% url 'deletequestion' question.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete" onclick="return confirm('Do you want to delete the question?')">
+            </form>
+
+      {% endif %}
+
 
       <!-- first row -->
       <div class="d-flex flex-row row mt-4">
@@ -75,14 +88,9 @@
             {{ question.detail|safe }}
           </div>
 
+          <hr>
          
-          <!-- Show Form to add answer -->
-          {% if user.is_authenticated %}
-          <div class="row mt-3">
-            
-          </div>
-          {% else %}
-          {% endif %}
+          
 
           <!-- Comment on Discussion -->
           {% for answer in question.answers_ondiscussion.all %}
@@ -104,8 +112,14 @@
             <div class="col ml-2">
               <!-- Author full Name -->
               <div class="row">
-                <a href="" style="color: red"> {{ answer.answered_by.fullname }} </a>
-              </div>
+                <a href="" style="color: red">
+                  {{ answer.answered_by.fullname }}
+                </a>
+                &ThinSpace; 
+                <form action="" method="post">
+                  <button class="btn btn-sm btn-outline-info" style="font-size:small;" onclick="return confirm('Do You Want to delete your answer?')">Delete</button>
+                </form>
+              </div> 
               <div class="row">
                 {{ answer.answer|safe }}
               </div>
@@ -117,13 +131,26 @@
             </h1>
 
           {% endfor %}
-          
-    
-    
-          
-
         </div>
       </div>
+
+      <hr>
+
+      <div class="row">
+        {% if user.is_authenticated %}
+          <div class="col mt-5">
+              <h3>Add Your Answer</h3>
+              <form action="{% url 'newanswer' question.id %}" method="post">
+                {% csrf_token %}
+                {{ questionanswerform }}
+                <input type="submit" value="Add Answer" class="btn btn-sm btn-outline-primary">
+              </form>
+          </div>
+          {% else %}
+          {% endif %}
+    
+      </div>
+
     </div>
 
 {% endblock %}

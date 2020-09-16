@@ -13,5 +13,14 @@ urlpatterns = [
     path('update/<int:id>-<slug:slug>/', views.QuestionUpdateView.as_view(), name='updatequestion'),
 
     # Delete Question
+    path('deletequestion/<int:id>/', views.deletequestion, name='deletequestion'),
+
+    # Add Answer
+    path('addanswer/<int:questionid>/', views.newanswer, name='newanswer'),
+
+    # Delete Answer
+    path('deleteanswer/<int:answerid>/', views.deleteanswer, name='deleteanswer'),
+
+     
 
 ]

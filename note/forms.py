@@ -19,4 +19,3 @@ class NewNoteForm(ModelForm):
         widgets = {
             'content': SummernoteWidget(),
         }
-    
