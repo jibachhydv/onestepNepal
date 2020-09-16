@@ -82,10 +82,10 @@ class PasswordResetCompleteView(PasswordResetCompleteView):
 
 
 # Profile
-def profile(request,id):
+def profile(request,id, username):
     
     try:
-        user = User.objects.get(pk=id)
+        user = User.objects.get(pk=id, username=username)
     except User.DoesNotExist:
         return HttpResponse("No Such User")
     

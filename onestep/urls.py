@@ -12,6 +12,9 @@ urlpatterns = [
     # note urls
     path('note/', include('note.urls')),
 
+    # Discussion
+    path('ask/', include('discussion.urls')),
+
     # Django Summer Not
     path('summernote/', include('django_summernote.urls')),
 

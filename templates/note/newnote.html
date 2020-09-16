@@ -4,13 +4,17 @@
     Create New Note
 {% endblock title %}
 
+{% load crispy_forms_tags %}
+
 {% block body %}
 
     <div class="container">
         <h1>New Note</h1>
         <form action="" method="post">
+
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
+
             <input type="submit" value="Create Note" />
         </form>
     </div>

@@ -53,7 +53,7 @@ class Note(models.Model):
         ('cs', 'Computer Science'),
         ('account', 'Account'),
         ('business', 'Business'),
-        ('marketin', 'Marketing'),
+        ('marketing', 'Marketing'),
         ('general', 'General'),
     )
 
@@ -61,7 +61,7 @@ class Note(models.Model):
     title = models.CharField(max_length=250)
 
     # slug 
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=400)
 
     # Author
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notes')
@@ -118,3 +118,21 @@ class Note(models.Model):
     
     def increaseView(self):
         self.views = self.views + 1
+
+
+class Comment(models.Model):
+
+    # comment on which post
+    post = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='comments')
+
+    # Comment
+    comment = models.TextField()
+
+    # Time
+    comment_time = models.DateTimeField(auto_now_add=True)
+
+    # Comment By
+    comment_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment')
+
+    def __str__(self):
+        return self.comment[:50]

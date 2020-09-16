@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ question.title }}
+ {% endblock %} 
+
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+    <div class="container mt-5" style="max-width: 750px">
+      <!-- Question/Discussin Title -->
+      <h1>
+          {{ question.title }}
+      </h1>
+      {% if question.askedby == request.user %}
+            <a class="btn btn-sm btn-outline-info mr-2" href="{% url 'updatequestion' question.id question.slug %}">
+              Update
+            </a>
+            <form action="{% url 'deletequestion' question.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete" onclick="return confirm('Do you want to delete the question?')">
+            </form>
+
+      {% endif %}
+
+
+      <!-- first row -->
+      <div class="d-flex flex-row row mt-4">
+        <!-- Photo -->
+        <div class="col-1 mr-3" style="background-color: ">
+          <!-- Image of Author -->
+          <img
+            src="{{ question.askedby.photo.url }}"
+            alt="{{ question.askedby.fullname }}"
+            style="
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              vertical-align: middle;
+            "
+          />
+        </div>
+
+        <!-- Information -->
+        <div class="col-5 ml-4">
+          <div class="row">
+            <!-- Author full Name -->
+            <a href="" style="color: red">
+                {{ question.askedby.fullname }}
+            </a>
+          </div>
+          <div class="row">
+            <span style="font-size: 12px"> {{ question.time }} &ThinSpace; </span>
+            <a
+              href=""
+              style="color: #3ca8e7; font-size: small; text-decoration: none"
+            >
+              CS50x- General
+            </a>
+          </div>
+        </div>
+
+        <!-- Extra Information -->
+        <div class="col" style="background-color: ">
+          <div class="d-flex flex-row">
+            <span
+              style="font-family: Arial, Helvetica, sans-serif; font-size: 18px"
+              >
+              {{ question.views }}
+              </span
+            >
+          </div>
+          <div class="d-flex flex-row">
+            <span style="font-size: 12px; text-align: center"> VIEWS </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row mt-4">
+        <div class="col">
+      
+        </div>
+        <div class="col-11">
+          <!-- Question Detail-->
+          <div class="row">
+            {{ question.detail|safe }}
+          </div>
+
+          <hr>
+         
+          
+
+          <!-- Comment on Discussion -->
+          {% for answer in question.answers_ondiscussion.all %}
+           <div class="row mt-3">
+            <div class="col-1 mr-3 mr-md-0">
+              <!-- Image of Author -->
+              <img
+                src="{{ answer.answered_by.photo.url }}"
+                alt="{{ answer.answered_by.fullname }}"
+                style="
+                  border-radius: 50%;
+                  width: 30px;
+                  height: 30px;
+                  vertical-align: middle;
+                "
+              />
+            </div>
+
+            <div class="col ml-2">
+              <!-- Author full Name -->
+              <div class="row">
+                <a href="" style="color: red">
+                  {{ answer.answered_by.fullname }}
+                </a>
+                &ThinSpace; 
+                <form action="" method="post">
+                  <button class="btn btn-sm btn-outline-info" style="font-size:small;" onclick="return confirm('Do You Want to delete your answer?')">Delete</button>
+                </form>
+              </div> 
+              <div class="row">
+                {{ answer.answer|safe }}
+              </div>
+            </div>
+          </div>
+          {% empty %}
+            <h1>
+                No Answer Yet
+            </h1>
+
+          {% endfor %}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        {% if user.is_authenticated %}
+          <div class="col mt-5">
+              <h3>Add Your Answer</h3>
+              <form action="{% url 'newanswer' question.id %}" method="post">
+                {% csrf_token %}
+                {{ questionanswerform }}
+                <input type="submit" value="Add Answer" class="btn btn-sm btn-outline-primary">
+              </form>
+          </div>
+          {% else %}
+          {% endif %}
+    
+      </div>
+
+    </div>
+
+{% endblock %}

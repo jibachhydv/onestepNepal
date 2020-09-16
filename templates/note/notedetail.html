@@ -47,7 +47,10 @@
             <div class="col-9">
               <div style="color: #292929; font-size: 16px;">
                 <!-- Post Writer Name -->
-                {{ note.author.first_name }} {{ note.author.last_name}}
+                <a href="{% url 'profile' note.author.username note.author.id %}">
+                  {{ note.author.fullname }}
+                </a>
+                
                 <button
                   class="ml-3 d-none d-sm-inline mt-1 btn btn-outline-primary btn-sm"
                 >
@@ -110,64 +113,87 @@
 
       <hr />
       <h3>Comment</h3>
+
       <!-- All Comment -->
-      <div class="row m-2">
-            <!-- Commentor photo -->
-            <div class="col-1" style="background-color: ;">
-                <img src="geeta.jpeg" alt="" class="commentAvatar" />
-            </div>
+      {% for comment in comments %}
+        <div class="row m-2">
+              <!-- Commentor photo -->
+              <div class="col-1" style="background-color: ;">
+                  <img src="{{ comment.comment_by.photo.url }}" alt="{{ comment.comment_by.fullname }}" class="commentAvatar" />
+              </div>
 
-            <div class="col ml-4" style="">
-                <div>
-                    <a href="#">Geeta yadav</a>
-                </div>
-                <div style="background-color: gray;" class="p-1">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quasi placeat, ea maiores sed cupiditate repellat adipisci. Rem aut libero voluptate illo sed itaque nihil perferendis? Ratione architecto magnam molestias.
-                </div>
-                <div class="mt-1">
-                    <button class="btn btn-sm btn-outline-info">Upvote</button>
-                    <button class="btn btn-sm btn-outline-warning">Downnote</button>
-                    <button class="btn btn-sm btn-outline-danger">Report</button>
-                </div>
-            </div>
-      </div>
+              <div class="col ml-4">
+                  <div>
+                      <a href="{% url 'profile' comment.comment_by.username comment.comment_by.id %}">
+                              {{ comment.comment_by.fullname }}
+                       </a>
+                  </div>
+                  <div style="background-color: gray;" class="p-1">
+                    {{ comment.comment }}
+                  </div>
+                  <div class="mt-1">
+                      <button class="btn btn-sm btn-outline-info">Upvote</button>
+                      <button class="btn btn-sm btn-outline-warning">Downnote</button>
+                      {% if comment.comment_by == request.user %}
+                        <form action="{% url 'deletecomment' comment.pk %}" method="post" class="d-inline">
+                          {% csrf_token %}
+                          <input class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete the comment?')" type="submit" value="Delete">
+                        </form>
+                      {% endif %}
+                  </div>
+              </div>
+        </div>
 
-      <div class="row m-2">
-            <!-- Commentor photo -->
-            <div class="col-1" style="background-color: ;">
-                <img src="geeta.jpeg" alt="" class="commentAvatar" />
-            </div>
+        {% empty %}
 
-            <div class="col ml-4" style="">
-                <div>
-                    <a href="#">Geeta yadav</a>
-                </div>
-                <div style="background-color: gray;" class="p-1">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quasi placeat, ea maiores sed cupiditate repellat adipisci. Rem aut libero voluptate illo sed itaque nihil perferendis? Ratione architecto magnam molestias.
-                </div>
-                <div class="mt-1">
-                    <button class="btn btn-sm btn-outline-info">Upvote</button>
-                    <button class="btn btn-sm btn-outline-warning">Downnote</button>
-                    <button class="btn btn-sm btn-outline-danger">Report</button>
-                </div>
-            </div>
-      </div>
+          <div class="row m-2"> 
+              <h1>
+                No Comment
+              </h1>
+          </div>
+        
+      {% endfor %}
 
 
       <!-- Comment Form -->
-      <div class="row m-2">
-        <!-- Add New Comment Form -->
-        <div class="col-1">
-          <img src="geeta.jpeg" alt="" class="commentAvatar" />
-        </div>
-        <div class="col ml-4">
-            <div class="form-group">
-                    <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment ..."></textarea>
-            </div>
-            <button class="btn btn-sm">Add Comment</button>
+      {% if user.is_authenticated %}
+        <div class="row m-2">
+          <!-- Add New Comment Form -->
+          <div class="col-1">
+            <img src="{{ request.user.photo.url }}" alt="{{ request.user.fullname }}" class="commentAvatar" />
           </div>
-        </div>
+          <div class="col ml-4">
+            <form action="{% url 'newcomment' note.id %}" method="post" id="addcommentform">
+              {% csrf_token %}
+              <div class="form-group">
+                <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+                <textarea class="form-control" name='newcomment' id="newcommenttextArea" rows="3" placeholder="Comment ..."></textarea>
+              </div>
+              <button class="btn btn-sm" type="submit">Add Comment</button>
+            </form>
+            </div>
+          </div>
+      {% else %}
+          <div class="row m-2">
+            <p>
+              Please <a href="{% url 'login' %}">Sign In</a> to add comment
+            </p>
+          </div>
       </div>
+    {% endif %}
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log(document.getElementById('addcommentform'))
+        form = document.getElementById('addcommentform')
+        form.addEventListener('submit', (event) => {
+          if (document.getElementById('newcommenttextArea').value == '') {
+            console.log("Empty form cannot be submiited")
+            document.getElementById('newcommenttextArea').style.border = '1px solid red';
+            event.preventDefault();
+          } 
+          
+        })
+      })
+    </script>
 {% endblock body %}

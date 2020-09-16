@@ -1,9 +1,9 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from .models import Note
+from .models import Note, Comment
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -22,6 +22,12 @@ class NoteList(ListView):
     context_object_name = 'notes'
     template_name = 'note/notelist.html'
 
+def notelist(request):
+    notes = Note.published.all()
+    return render(request, 'note/notelist.html', {
+        'notes': notes,
+    })
+
 """ class NoteDetail(DetailView):
     model = Note
     context_object_name = 'note'
@@ -35,9 +41,10 @@ def notedetail(request, pk, slug):
         note = Note.objects.get(id=pk, slug=slug)
     except Note.DoesNotExist:
         return HttpResponse("Such Note Doesnot exist")
-    
+    comments = note.comments.all()
     return render(request, 'note/notedetail.html', {
         'note': note,
+        'comments': comments,
     })
 
 
@@ -84,7 +91,30 @@ def noteDelete(request, pk, slug):
     if request.user != note.author:
         return Http404("You are not allowed to delete the post")
         
-    note.delete()
+    note.status = 'draft'
+    note.save()
     return HttpResponseRedirect(reverse('notelist'))
+
+
+@login_required
+def newcomment(request, noteid):
+
+    if request.method == "POST":
+        comment = request.POST.get('newcomment')
+        if (comment == ''):
+            return redirect(request.META['HTTP_REFERER'])
+        note = Note.objects.get(pk=noteid)
+        user = request.user
+        Comment.objects.create(post=note, comment_by=user, comment=comment)
+        return redirect(request.META['HTTP_REFERER'])
     
-    
+@login_required
+def deletecomment(request, commentid):
+
+    try:
+        comment = Comment.objects.get(pk=commentid)
+    except Comment.DoesNotExist or Comment.MultipleObjectsReturned:
+        raise Http404("Not allowded")
+
+    comment.delete()
+    return redirect(request.META['HTTP_REFERER'])
