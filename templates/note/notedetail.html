@@ -132,8 +132,8 @@
                     {{ comment.comment }}
                   </div>
                   <div class="mt-1">
-                      <button class="btn btn-sm btn-outline-info">Upvote</button>
-                      <button class="btn btn-sm btn-outline-warning">Downnote</button>
+                      <!-- <button class="btn btn-sm btn-outline-info">Upvote</button>
+                      <button class="btn btn-sm btn-outline-warning">Downnote</button> -->
                       {% if comment.comment_by == request.user %}
                         <form action="{% url 'deletecomment' comment.pk %}" method="post" class="d-inline">
                           {% csrf_token %}
