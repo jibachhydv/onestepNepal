@@ -20,7 +20,8 @@ def questiondetail(request,slug,id):
 
     except Discussion.DoesNotExist or Discussion.MultipleObjectsReturned:
         raise Http404("Do Such Question Exist")
-    
+    question.increaseView()
+    question.save()
     return render(request, 'discussion/questiondetail.html', {
         'question': question,
         'questionanswerform': QuestionAnswer(),
