@@ -32,10 +32,12 @@
     {% endif %}
       <div class="row">
         <div class="col m-2">
+          {% if next %}
+          <form method="POST" action="{% url 'login' %}?next={{ next }}">
+          {% else %}
           <form method="POST" action="{% url 'login' %}">
-
+          {% endif %}
             {% csrf_token %}
-
             <div class="form-group">
               <label for="id_username">Email address</label>
               <input
@@ -61,7 +63,6 @@
                 required
               />
             </div>
-            <input type="hidden" name="next" value="{{ next }}" />
             <button type="submit" class="btn btn-primary">Log In</button>
             <a href="{% url 'password_reset' %}" class="ml-2">Forgot Password?</a>
           </form>
