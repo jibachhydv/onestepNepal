@@ -45,6 +45,7 @@
             class="btn btn-secondary btn-sm dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
+            name="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
@@ -262,42 +263,61 @@
     {% block body %} {% endblock body %}
 
     <hr />
+    
+    
+    <!-- Footer -->
+    <footer class="container-fluid p-2"  style="background-color: #232729; color: white;">
+      <div class="row">
+
+        <!-- Left Side Space -->
+        <div class="col">
+          
+        </div>
+       
+        <div class="col-6 col-md-3">
+          <div class="d-flex flex-column">
+            One Step Nepal
+            <a href="{% url 'notelist' %}">Note</a>
+            <a href="{% url 'newnote' %}">Create Note</a>
+            <a href="{% url 'allquestions' %}">Questions</a>
+            <a href="{% url 'askquestion' %}">Ask Question</a>
+            <a href="">After SEE</a>
+            <a href="">Learning Resources</a>
+          </div>
+        </div>
+
+        <div class="col-5 col-md-4">
+          <div class="d-flex flex-column">
+            Connect With Us
+            <a href="">Facebook Page</a>
+            <a href="">Facebook Group</a>
+            <a href="">Linkedin</a>
+            <a href="">Instagram</a>
+            <a href="">Twitter</a>
+          </div>
+        </div>
+ 
+        <div class="col-md-4">
+          <div class="d-flex flex-column align-items-center align-items-md-start">
+            Company
+            <a href="">About Us</a>
+            <a href="">Motivation</a>
+            <a href="">Team</a>
+            <a href="">Contact Us</a>
+            <a href="">Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    
+    
+    
 
     <!-- Footer -->
 
     <!-- All the other options -->
-    <div class="container">
-      <div class="row justify-content-center align-item-center">
-        <div class="col-sm-12" id="otherOption">
-          <a href="{% url 'login' %}" class="ml-4">Log In</a>
-          <a href="{% url 'newnote'%}" class="ml-4">Create Note</a>
-          <a href="#" class="ml-4">Note</a>
-          <a href="#" class="ml-4">Flash Card</a>
-          <a href="#" class="ml-4">Ask</a>
-          <a href="#" class="ml-4">Take Test</a>
-          <a href="#" class="ml-4">Boot camp</a>
-          <a href="#" class="ml-4">Meet US</a>
-          <a href="#" class="ml-4">Create Flash Card</a>
-          <a href="#" class="ml-4">Submit Question</a>
-          <a href="#" class="ml-4">Learning Resources</a>
-          <a href="#" class="ml-4">Oppurtunity</a>
-          <a href="#" class="ml-4">After SEE</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Social Media Pages -->
-    <div
-      id="socialmediaFooter"
-      class="d-flex flex-wrap mt-4 align-content-center justify-content-center"
-    >
-      <a href="#"> Facebook Group </a>
-      <a href="#"> Facebook Page </a>
-      <a href="#"> Twitter </a>
-      <a href="#"> Linkedin </a>
-      <a href="#"> Youtube </a>
-    </div>
-
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
