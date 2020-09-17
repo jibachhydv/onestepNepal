@@ -1,64 +1,132 @@
-{% extends 'base.html' %}
-
-{% block title %}
-    Sign Up
-{% endblock %}
-
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} Sign Up {% endblock %} 
 
 {% block body %}
-    <div class="container" style="max-width: 750px;">
+<div class="container" style="max-width: 750px">
+
+  <div class="row mt-3">
+        <div class="col">
+          <h1 style="text-align: center;">
+            One Step <img src="{% static 'images/Flag_of_Nepal.png' %}" alt="" width="10%" >
+          </h1>
+        </div>
+
+  </div>
+  <p style="text-align: center; color: red;">Connect, Meet, Inspire and Teach to Learn</p>
+
+  <hr style="color: red;">
+  <h1 style="text-align: center">Create New Account</h1>
 
 
-        <h1 style="text-align: center;">
-            Sign Up 
-        </h1>
-
-        <form action="{% url 'signup' %}" method="post" autocomplete="off">
-            {% csrf_token %}
-            <div>
-                <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" autocomplete="fdskhiu">
-            </div>
-            
-            <div>
-                <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName">
-            </div>
-            
-            <div>
-                <label for="lastName">LastName</label>
-                <input type="text" name="lastName" id="lastName">
-            </div>
-
-            <div>
-                <label for="password1">Password</label>
-                <input type="password" name="password1" id="password1">
-            </div>
-
-            <div>
-                <label for="password2">Confirm Password</label>
-                <input type="password" name="password2" id="password2">
-            </div>
-
-            <div>
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username">
-            </div>
-
-            <div>
-                <input type="file" name="profilePicture" id="profilepicture" accept="image/x-png,image/gif,image/jpeg">
-            </div>
-
-            <div>
-                <button type="submit" class="btn btn-sm btn-outline-info">Create Account</button>
-            </div>
-
-
-        </form>
-
+  <!-- <form action="{% url 'signup' %}" method="post" autocomplete="off">
+    {% csrf_token %}
+    <div>
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" autocomplete="fdskhiu" />
     </div>
 
-    
+    <div>
+      <label for="firstName">First Name</label>
+      <input type="text" name="firstName" id="firstName" />
+    </div>
 
+    <div>
+      <label for="lastName">LastName</label>
+      <input type="text" name="lastName" id="lastName" />
+    </div>
+
+    <div>
+      <label for="password1">Password</label>
+      <input type="password" name="password1" id="password1" />
+    </div>
+
+    <div>
+      <label for="password2">Confirm Password</label>
+      <input type="password" name="password2" id="password2" />
+    </div>
+
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" />
+    </div>
+
+    <div>
+      <input
+        type="file"
+        name="profilePicture"
+        id="profilepicture"
+        accept="image/x-png,image/gif,image/jpeg"
+      />
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-sm btn-outline-info">
+        Create Account
+      </button>
+    </div>
+  </form> -->
+
+  <!-- Sign up Form -->
+  <form class="mt-5" action="{% url 'signup' %}" method="POST">
+
+    {% csrf_token %}
+
+    <div class="row">
+
+      <div class="col-12 col-md-6">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" placeholder="First name" />
+      </div>
+
+      <div class="col-12 col-md-6">
+          <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" class="form-control" placeholder="Last name" />
+      </div>
+    </div>
+
+    <div class="form-group mt-1">
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <label for="password1">Password</label>
+        <input type="password" class="form-control" name="password1" placeholder="Password" />
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2" class="form-control" placeholder="Confirm password" />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+
+      <div class="col-12 col-md-6">
+        <label for="profilePicture">Profile Picture</label>
+        <input type="file" class="form-control" name="profilePicture" accept="image/x-png, image/gif, image/jpeg" />
+      </div>
+
+      <div class="col-12 col-md-6">
+          <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="User Name" />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-sm btn-primary mt-2">Create Account</button>
+  </form>
+
+</div>
 
 {% endblock body %}

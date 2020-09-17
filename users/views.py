@@ -29,7 +29,7 @@ def homepage(request):
 
 
 def login(request):
-
+   
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -40,7 +40,7 @@ def login(request):
                 account_login(request,user)
                 return HttpResponseRedirect(reverse('homepage'))
             else:
-                return HttpResponse("Your account has been disabled")
+                return HttpResponse("Please Confirm the mail to login")
         else:
             return render(request, 'account/login.html', {
                 'error': True
