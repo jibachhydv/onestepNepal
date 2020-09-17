@@ -20,7 +20,7 @@ def questiondetail(request,slug,id):
 
     except Discussion.DoesNotExist or Discussion.MultipleObjectsReturned:
         raise Http404("Do Such Question Exist")
-
+    
     return render(request, 'discussion/questiondetail.html', {
         'question': question,
         'questionanswerform': QuestionAnswer(),
@@ -53,6 +53,8 @@ def askquestion(request):
             return render(request, 'discussion/questionlist.html', {
                 'questions': Discussion.objects.all()
             })
+        else:
+            return Http404("Form is not valid")
     
     else:
         form = AskForm()

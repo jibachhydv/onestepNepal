@@ -117,6 +117,7 @@
                 </a>
                 &ThinSpace; 
                 <form action="" method="post">
+                  {% csrf_token %}
                   <button class="btn btn-sm btn-outline-info" style="font-size:small;" onclick="return confirm('Do You Want to delete your answer?')">Delete</button>
                 </form>
               </div> 

@@ -42,6 +42,10 @@ def notedetail(request, pk, slug):
     except Note.DoesNotExist:
         return HttpResponse("Such Note Doesnot exist")
     comments = note.comments.all()
+
+    note.increaseView()
+    note.save()
+    print(note.views)
     return render(request, 'note/notedetail.html', {
         'note': note,
         'comments': comments,

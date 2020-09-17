@@ -97,7 +97,6 @@ class Note(models.Model):
     def __str__(self):
         return self.title
 
-
     # Model Manager
     objects = models.Manager()
     published = PublishedManager() 
@@ -117,7 +116,8 @@ class Note(models.Model):
         return self.likes.all().count()
     
     def increaseView(self):
-        self.views = self.views + 1
+        self.views+=1
+
 
 
 class Comment(models.Model):
