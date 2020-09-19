@@ -5,10 +5,18 @@
 {% endblock title %}
 
 {% block body %}
-    <!-- Post -->
-    <div class="container mt-5" style="max-width: 750px;">
+
+  <div class="container-fluid" style="background-color:;">
+    <div class="row" style="background-color:;">
+      <div class="col-12 col-lg-3 order-2 order-lg-0" style="background-color: skyblue;">
+        <h1>
+          Related Post
+        </h1>
+      </div>
+      <div class="col">
+        <div class="container-fluid mt-5" style="max-width: 750px;">
       <!-- Post Title -->
-      <div class="row ml-2 mr-2" style="background-color: ;">
+      <div class="row" style="background-color: ;">
         <h1>
           <!-- Post title -->
           {{ note.title }}
@@ -186,6 +194,10 @@
       </div>
     {% endif %}
     </div>
+      </div>
+    </div>
+  </div>
+
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -196,8 +208,7 @@
             console.log("Empty form cannot be submiited")
             document.getElementById('newcommenttextArea').style.border = '1px solid red';
             event.preventDefault();
-          } 
-          
+          }
         })
       })
     </script>
