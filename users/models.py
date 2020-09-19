@@ -69,8 +69,8 @@ class User(AbstractUser):
                                        blank=True)
 
     photo = models.ImageField(upload_to='profile',
-                              blank=True,
-                              null=True)
+                              default='../static/images/Flag_of_Nepal.png'
+                              )
 
     grade = models.CharField(
         max_length=200,

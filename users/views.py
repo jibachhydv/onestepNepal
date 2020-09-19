@@ -109,7 +109,11 @@ def signup(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         username = request.POST['username']
-        photo = request.POST['profilePicture']
+        if request.POST['profilePicture']:
+            havePhoto = True
+        else:
+            havePhoto = False
+        # photo = request.POST['profilePicture']
         
         # Ensure that password matches
 
@@ -122,10 +126,15 @@ def signup(request):
         
         # Attempt to create a new user
         try:
-            user = User.objects.create_user(username=username, 
-                    first_name=first_name, last_name=last_name, 
-                    email=email_address, password=password2
-                    ,photo=photo)
+            if havePhoto:
+                user = User.objects.create_user(username=username, 
+                        first_name=first_name, last_name=last_name, 
+                        email=email_address, password=password2, 
+                        photo=request.POST['profilePicture'])
+            else:
+                user = User.objects.create_user(username=username, 
+                        first_name=first_name, last_name=last_name, 
+                        email=email_address, password=password2)
             user.is_active = False
             user.save()
             
