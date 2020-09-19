@@ -22,10 +22,28 @@ class NoteList(ListView):
     context_object_name = 'notes'
     template_name = 'note/notelist.html'
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 def notelist(request):
+    # Get all the published notes
     notes = Note.published.all()
+
+    # Show five notes per page
+    paginator = Paginator(notes, 10)
+
+    # Get the current page number
+    page_number = request.GET.get('page')
+
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+
     return render(request, 'note/notelist.html', {
-        'notes': notes,
+        'page_obj': page_obj,
     })
 
 """ class NoteDetail(DetailView):
