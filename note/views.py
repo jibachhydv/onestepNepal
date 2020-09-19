@@ -63,7 +63,10 @@ def notedetail(request, pk, slug):
 
     note.increaseView()
     note.save()
-    print(note.views)
+    # print(note.views)
+
+    # 3 related post
+    
     return render(request, 'note/notedetail.html', {
         'note': note,
         'comments': comments,
