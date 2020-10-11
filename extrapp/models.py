@@ -14,14 +14,18 @@ class CurrentBook(models.Model):
     # Summary of the Book
     summary = models.TextField(max_length=1000)
 
-    # Participated By
-    participatedBy = models.ManyToManyField(User, related_name='participatedBy')
+    # CoverImage of the Book
+    coverImage = models.ImageField(verbose_name='Book Cover Image', upload_to='readnepal')
 
     # Date
     date = models.DateField()
 
+    # isItCurrentBook
+    isItCurrentBook = models.BooleanField(verbose_name='Is this a Book of Month')
+
     def __str__(self):
         return self.name
+    
 
     
 
@@ -41,4 +45,21 @@ class OtherBook(models.Model):
 
     def __str__(self):
         return f'{self.participatedBy} is reading {self.name}'
+
+class ReadNepalParticipant(models.Model):
+    
+    # Reader Name
+    readerName = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookreader')
+
+    # Date Joined
+    dateJoined = models.DateTimeField(verbose_name='Reader Joined Date', auto_now=True)
+
+    # Book Name
+    bookName = models.ForeignKey(CurrentBook, on_delete=models.CASCADE, related_name='booksName')
+
+    # Complete Reading
+    readingStatus = models.BooleanField(verbose_name='Have you completed Reading')
+
+    def __str__(self):
+        return f"{self.readerName} is reading {self.bookName}"
 

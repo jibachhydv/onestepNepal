@@ -1,0 +1,179 @@
+{% extends 'base.html' %} {% block body %}
+
+
+<div class="container" style="max-width: ">
+  <div class="row">
+    <h1 class="ml-auto mr-auto">Read Nepal</h1>
+  </div>
+
+  <div class="row">
+    <h1 class="ml-auto mr-auto">Book of the Month</h1>
+  </div>
+
+  <div class="row mt-4">
+    <!-- First Book -->
+    <div class="col-12 col-sm-6" style="background-color: ">
+      <div class="row">
+        <h3>Educated</h3>
+      </div>
+
+      <div class="row">
+        <img
+          class="img-fluid"
+          src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506026635l/35133922.jpg"
+          alt="Book of the Month English"
+        />
+      </div>
+
+      <!-- Book Detail Information -->
+      <div class="row mt-3">by Tara Westover</div>
+
+      <!-- Book Summary -->
+      <div class="row mt-3">
+        <details close>
+          <summary>Summary</summary>
+          <p>
+            Tara Westover was 17 the first time she set foot in a classroom.
+            Born to survivalists in the mountains of Idaho, she prepared for the
+            end of the world by stockpiling home-canned peaches and sleeping
+            with her "head-for-the-hills bag". In the summer she stewed herbs
+            for her mother, a midwife and healer, and in the winter she salvaged
+            in her father's junkyard. Her father forbade hospitals, so Tara
+            never saw a doctor or nurse. Gashes and concussions, even burns from
+            explosions, were all treated at home with herbalism. The family was
+            so isolated from mainstream society that there was no one to ensure
+            the children received an education and no one to intervene when one
+            of Tara's older brothers became violent. Then, lacking any formal
+            education, Tara began to educate herself. She taught herself enough
+            mathematics and grammar to be admitted to Brigham Young University,
+            where she studied history, learning for the first time about
+            important world events like the Holocaust and the civil rights
+            movement. Her quest for knowledge transformed her, taking her over
+            oceans and across continents, to Harvard and to Cambridge. Only then
+            would she wonder if she'd traveled too far, if there was still a way
+            home. Educated is an account of the struggle for self-invention. It
+            is a tale of fierce family loyalty and of the grief that comes with
+            severing the closest of ties. With the acute insight that
+            distinguishes all great writers, Westover has crafted a universal
+            coming-of-age story that gets to the heart of what an education is
+            and what it offers: the perspective to see one's life through new
+            eyes and the will to change it.
+          </p>
+        </details>
+      </div>
+
+      <!-- Take Challenge Button -->
+      <div class="row mt-3">
+        <button type="button" class="btn btn-outline-primary">
+          Take Challenge
+        </button>
+      </div>
+    </div>
+
+    <!-- Second Book -->
+    <div class="col-12 col-sm-6" style="background-color: ">
+      <div class="row">
+        <h3>Where the Crawdads Sing</h3>
+      </div>
+
+      <div class="row">
+        <img
+          class="img-fluid"
+          src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1582135294l/36809135._SY475_.jpg"
+          alt="Book of the Month English"
+        />
+      </div>
+
+      <!-- Book Detail Information -->
+      <div class="row mt-3">by Delia Owens</div>
+
+      <!-- Book Summary -->
+      <div class="row mt-3">
+        <details close>
+          <summary>Summary</summary>
+          <p>
+            For years, rumors of the “Marsh Girl” have haunted Barkley Cove, a
+            quiet town on the North Carolina coast. So in late 1969, when
+            handsome Chase Andrews is found dead, the locals immediately suspect
+            Kya Clark, the so-called Marsh Girl. But Kya is not what they say.
+            Sensitive and intelligent, she has survived for years alone in the
+            marsh that she calls home, finding friends in the gulls and lessons
+            in the sand. Then the time comes when she yearns to be touched and
+            loved. When two young men from town become intrigued by her wild
+            beauty, Kya opens herself to a new life–until the unthinkable
+            happens. Perfect for fans of Barbara Kingsolver and Karen Russell,
+            Where the Crawdads Sing is at once an exquisite ode to the natural
+            world, a heartbreaking coming-of-age story, and a surprising tale of
+            possible murder. Owens reminds us that we are forever shaped by the
+            children we once were, and that we are all subject to the beautiful
+            and violent secrets that nature keeps.
+          </p>
+        </details>
+      </div>
+
+      <!-- Take Challenge Button -->
+      <div class="row mt-3">
+        <button type="button" class="btn btn-outline-primary">
+          Take Challenge
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <form action="">
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Add Your Own Book..."
+        />
+        <button type="submit" class="btn btn-primary mt-2">
+          Add your own book
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <h1>What's Your Friend is reading?</h1>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Name Of Book</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
