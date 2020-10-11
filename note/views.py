@@ -56,20 +56,50 @@ def notelist(request):
 def notedetail(request, pk, slug):
 
     try:
-        note = Note.objects.get(id=pk, slug=slug)
+        note = Note.published.get(id=pk, slug=slug)
     except Note.DoesNotExist:
         return HttpResponse("Such Note Doesnot exist")
     comments = note.comments.all()
 
     note.increaseView()
     note.save()
-    # print(note.views)
 
-    # 3 related post
-    
+    # List of Related Post
+    relatedPost = []
+
+    # List of Excluded Post
+    excludePost = []
+    excludePost.append(note.id)
+
+    # Post from Same User if available else random page
+    sameUserNote = Note.published.filter(author=note.author).exclude(id__in=excludePost)
+    if len(sameUserNote) >= 1:
+        relatedPost.append(sameUserNote[0])
+        excludePost.append(sameUserNote[0].id)
+    else:
+        relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+
+    # Post from same subject if available
+    sameSubjectNote = Note.published.filter(subject=note.subject).exclude(id__in=excludePost)
+    if len(sameSubjectNote) >= 1:
+        relatedPost.append(sameSubjectNote[0])
+        excludePost.append(sameSubjectNote[0].id)
+    else:
+        relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+
+    # Post with most views
+    mostViewedPost = Note.published.all().order_by('-views').exclude(id__in=excludePost)
+    if len(mostViewedPost) >= 1:
+        relatedPost.append(mostViewedPost[0])
+        excludePost.append(mostViewedPost[0].id)
+    else:
+        relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+
+    # print(relatedPost)
     return render(request, 'note/notedetail.html', {
         'note': note,
         'comments': comments,
+        'relatedPost': relatedPost,
     })
 
 
