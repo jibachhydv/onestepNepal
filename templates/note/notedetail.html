@@ -1,86 +1,107 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ note.title }}
+{{ note.title }}
 {% endblock title %}
 
 {% block body %}
 
-  <div class="container-fluid" style="background-color:;">
-    <div class="row" style="background-color:;">
-      <div class="col-12 col-lg-3 order-2 order-lg-0" style="background-color: skyblue;">
-        <h1>
-          Related Post
-        </h1>
+<div class="container-fluid" style="background-color:;">
+  <div class="row" style="background-color:;">
+
+    <!-- Related Notes -->
+    <div class="col-12 col-lg-3 order-2 order-lg-0" style="background-color: ;">
+      <h1>
+        Related Post
+      </h1>
+
+      <!-- Iterating Over the relatedNotes -->
+      {% for note in relatedNotes %}
+      <div class="card border-primary mb-2 mt-2">
+        <div class="card-body">
+          <a href="{% url 'notedetail' note.pk note.slug %}" style="color: #c52929">
+            {{ note.title }}
+          </a>
+
+          <br />
+          <span style="color: #c52929">
+            <a href=""> #{{ note.subject }} </a>
+          </span>
+          
+          <span style="color: #c52929">
+            <a href=""> #{{ note.grade }} </a>
+          </span>
+        </div>
       </div>
-      <div class="col">
-        <div class="container-fluid mt-5" style="max-width: 750px;">
-      <!-- Post Title -->
-      <div class="row" style="background-color: ;">
-        <h1>
-          <!-- Post title -->
-          {{ note.title }}
-        </h1>
-        {% if note.author == request.user %}
+      {% endfor %}
+    </div>
+
+
+    <div class="col">
+      <div class="container-fluid mt-5" style="max-width: 750px;">
+        <!-- Post Title -->
+        <div class="row" style="background-color: ;">
+          <h1>
+            <!-- Post title -->
+            {{ note.title }}
+          </h1>
+          {% if note.author == request.user %}
           <p class="ml-5">
-            
+
             <a class="btn btn-sm btn-outline-info mr-2" href="{% url 'noteupdate' note.id note.slug %}">
               Update
             </a>
 
             <form action="{% url 'notedelete' note.id note.slug %}" method="post">
-                {% csrf_token %}
-                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete" onclick="return confirm('Do you want to delete the post?')">
+              {% csrf_token %}
+              <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete"
+                onclick="return confirm('Do you want to delete the post?')">
             </form>
 
           </p>
-        {% endif %}
-      </div>
+          {% endif %}
+        </div>
 
-      <hr />
+        <hr />
 
-      <!-- Second Row Post Writer -->
-      <div class="row mt-5 ml-2 mr-2" style="background-color: ;">
-        <!-- Post Writer Image Avatar and detail info -->
-        <div class="col-12 col-md-7" style="background-color: ;">
-          <div class="row">
-            <!-- Image Avatar -->
-            <div class="col-3">
-              {% if note.author.photo %}
+        <!-- Second Row Post Writer -->
+        <div class="row mt-5 ml-2 mr-2" style="background-color: ;">
+          <!-- Post Writer Image Avatar and detail info -->
+          <div class="col-12 col-md-7" style="background-color: ;">
+            <div class="row">
+              <!-- Image Avatar -->
+              <div class="col-3">
+                {% if note.author.photo %}
                 <img src="{{ note.author.photo.url }}" alt="userName" class="avatar" />
-              {% else %}
+                {% else %}
                 <!-- Add the user photo -->
                 hello
-              {% endif %}
-            </div>
-
-            <!-- Post Writer Detail -->
-            <div class="col-9">
-              <div style="color: #292929; font-size: 16px;">
-                <!-- Post Writer Name -->
-                <a href="{% url 'profile' note.author.username note.author.id %}">
-                  {{ note.author.fullname }}
-                </a>
-                
-                <button
-                  class="ml-3 d-none d-sm-inline mt-1 btn btn-outline-primary btn-sm"
-                >
-                  Follow
-                </button>
+                {% endif %}
               </div>
-              <div
-                style="
+
+              <!-- Post Writer Detail -->
+              <div class="col-9">
+                <div style="color: #292929; font-size: 16px;">
+                  <!-- Post Writer Name -->
+                  <a href="{% url 'profile' note.author.username note.author.id %}">
+                    {{ note.author.fullname }}
+                  </a>
+
+                  <button class="ml-3 d-none d-sm-inline mt-1 btn btn-outline-primary btn-sm">
+                    Follow
+                  </button>
+                </div>
+                <div style="
                   font-size: 16px;
                   color: #757575;
                   line-height: 20px;
                   font-style: normal;
                   font-weight: 300;
-                "
-              >
-                <!-- Post published Date -->
-                {{ note.created }} 
-              </div>
-              <div style="
+                ">
+                  <!-- Post published Date -->
+                  {{ note.created }}
+                </div>
+                <div style="
                   font-size: 16px;
                   color: #757575;
                   line-height: 20px;
@@ -89,20 +110,20 @@
                 ">
                   <!-- View Count -->
                   {{ note.views }} View
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Post Share Buttons Column -->
-        <div class="col mt-3 offset-md-0" style="background-color: ;">
-          <!-- Share: Font Awesome Icon
+          <!-- Post Share Buttons Column -->
+          <div class="col mt-3 offset-md-0" style="background-color: ;">
+            <!-- Share: Font Awesome Icon
                 Yet To Implement -->
+          </div>
         </div>
-      </div>
 
-      <!-- Upvote Downvote Comment and Views -->
-      <!-- <div
+        <!-- Upvote Downvote Comment and Views -->
+        <!-- <div
         class="row m-2 mt-0 d-flex flex-wrap justify-content-around"
         style="background-color: rgb(141, 148, 144); color: white;"
       >
@@ -116,59 +137,61 @@
         </div>
       </div>
  -->
-      <hr />
+        <hr />
 
-      <!-- Post Content RichText  -->
-      <div class="row ml-2 mt-3 mr-2" style="text-overflow: wrap">
-        {{ note.content|safe }}
-      </div>
+        <!-- Post Content RichText  -->
+        <div class="row ml-2 mt-3 mr-2" style="text-overflow: wrap">
+          {{ note.content|safe }}
+        </div>
 
-      <hr />
-      <h3>Comment</h3>
+        <hr />
+        <h3>Comment</h3>
 
-      <!-- All Comment -->
-      {% for comment in comments %}
+        <!-- All Comment -->
+        {% for comment in comments %}
         <div class="row m-2">
-              <!-- Commentor photo -->
-              <div class="col-1" style="background-color: ;">
-                  <img src="{{ comment.comment_by.photo.url }}" alt="{{ comment.comment_by.fullname }}" class="commentAvatar" />
-              </div>
+          <!-- Commentor photo -->
+          <div class="col-1" style="background-color: ;">
+            <img src="{{ comment.comment_by.photo.url }}" alt="{{ comment.comment_by.fullname }}"
+              class="commentAvatar" />
+          </div>
 
-              <div class="col ml-4">
-                  <div>
-                      <a href="{% url 'profile' comment.comment_by.username comment.comment_by.id %}">
-                              {{ comment.comment_by.fullname }}
-                       </a>
-                  </div>
-                  <div style="background-color: gray;" class="p-1">
-                    {{ comment.comment }}
-                  </div>
-                  <div class="mt-1">
-                      <!-- <button class="btn btn-sm btn-outline-info">Upvote</button>
+          <div class="col ml-4">
+            <div>
+              <a href="{% url 'profile' comment.comment_by.username comment.comment_by.id %}">
+                {{ comment.comment_by.fullname }}
+              </a>
+            </div>
+            <div style="background-color: gray;" class="p-1">
+              {{ comment.comment }}
+            </div>
+            <div class="mt-1">
+              <!-- <button class="btn btn-sm btn-outline-info">Upvote</button>
                       <button class="btn btn-sm btn-outline-warning">Downnote</button> -->
-                      {% if comment.comment_by == request.user %}
-                        <form action="{% url 'deletecomment' comment.pk %}" method="post" class="d-inline">
-                          {% csrf_token %}
-                          <input class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete the comment?')" type="submit" value="Delete">
-                        </form>
-                      {% endif %}
-                  </div>
-              </div>
+              {% if comment.comment_by == request.user %}
+              <form action="{% url 'deletecomment' comment.pk %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <input class="btn btn-sm btn-outline-danger"
+                  onclick="return confirm('Are you sure you want to delete the comment?')" type="submit" value="Delete">
+              </form>
+              {% endif %}
+            </div>
+          </div>
         </div>
 
         {% empty %}
 
-          <div class="row m-2"> 
-              <h1>
-                No Comment
-              </h1>
-          </div>
-        
-      {% endfor %}
+        <div class="row m-2">
+          <h1>
+            No Comment
+          </h1>
+        </div>
+
+        {% endfor %}
 
 
-      <!-- Comment Form -->
-      {% if user.is_authenticated %}
+        <!-- Comment Form -->
+        {% if user.is_authenticated %}
         <div class="row m-2">
           <!-- Add New Comment Form -->
           <div class="col-1">
@@ -179,37 +202,38 @@
               {% csrf_token %}
               <div class="form-group">
                 <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                <textarea class="form-control" name='newcomment' id="newcommenttextArea" rows="3" placeholder="Comment ..."></textarea>
+                <textarea class="form-control" name='newcomment' id="newcommenttextArea" rows="3"
+                  placeholder="Comment ..."></textarea>
               </div>
               <button class="btn btn-sm" type="submit">Add Comment</button>
             </form>
-            </div>
           </div>
-      {% else %}
-          <div class="row m-2">
-            <p>
-              Please <a href="{% url 'login' %}">Sign In</a> to add comment
-            </p>
-          </div>
+        </div>
+        {% else %}
+        <div class="row m-2">
+          <p>
+            Please <a href="{% url 'login' %}">Sign In</a> to add comment
+          </p>
+        </div>
       </div>
-    {% endif %}
-    </div>
-      </div>
+      {% endif %}
     </div>
   </div>
+</div>
+</div>
 
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        console.log(document.getElementById('addcommentform'))
-        form = document.getElementById('addcommentform')
-        form.addEventListener('submit', (event) => {
-          if (document.getElementById('newcommenttextArea').value == '') {
-            console.log("Empty form cannot be submiited")
-            document.getElementById('newcommenttextArea').style.border = '1px solid red';
-            event.preventDefault();
-          }
-        })
-      })
-    </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log(document.getElementById('addcommentform'))
+    form = document.getElementById('addcommentform')
+    form.addEventListener('submit', (event) => {
+      if (document.getElementById('newcommenttextArea').value == '') {
+        console.log("Empty form cannot be submiited")
+        document.getElementById('newcommenttextArea').style.border = '1px solid red';
+        event.preventDefault();
+      }
+    })
+  })
+</script>
 {% endblock body %}

@@ -78,6 +78,7 @@ def notedetail(request, pk, slug):
         excludePost.append(sameUserNote[0].id)
     else:
         relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+        excludePost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0].id)
 
     # Post from same subject if available
     sameSubjectNote = Note.published.filter(subject=note.subject).exclude(id__in=excludePost)
@@ -86,6 +87,7 @@ def notedetail(request, pk, slug):
         excludePost.append(sameSubjectNote[0].id)
     else:
         relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+        excludePost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0].id)
 
     # Post with most views
     mostViewedPost = Note.published.all().order_by('-views').exclude(id__in=excludePost)
@@ -94,12 +96,13 @@ def notedetail(request, pk, slug):
         excludePost.append(mostViewedPost[0].id)
     else:
         relatedPost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0])
+        excludePost.append(Note.published.all().exclude(id__in=excludePost).order_by('-views')[0].id)
 
     # print(relatedPost)
     return render(request, 'note/notedetail.html', {
         'note': note,
         'comments': comments,
-        'relatedPost': relatedPost,
+        'relatedNotes': relatedPost,
     })
 
 
