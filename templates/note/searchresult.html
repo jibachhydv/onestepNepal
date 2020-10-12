@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container mt-5" style="max-width: 750px">
+  <div class="row">
+    
+    
+    
+    <div class="col-12">
+      <h1>Results for "{{ query }}":</h1>
+    </div>
+
+    {% for note in searchNotes %}
+
+    <div class="col-12 col-sm-6 mt-4">
+      <div class="card border-primary mb-3">
+        <div class="card-body">
+          <a href="{% url 'notedetail' note.pk note.slug %}" style="color: #c52929">
+            {{ note.title }}
+          </a>
+          <br />
+          <span style="color: #c52929">
+            <a href=""> #{{ note.subject }} </a>
+          </span>
+          <span style="color: #c52929">
+            <a href=""> #{{ note.grade }} </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    {% empty %}
+    <h1>No result Matched</h1>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-
 {% block title %}
     Ask Question
 {% endblock title %}
@@ -11,6 +10,9 @@
 {% block body %}
      <div class="container mt-5" style="max-width: 750px; background-color: ;"> 
         <!-- Form for asking question -->
+        <h1>
+            Ask Your Question
+        </h1>
         <form action="{% url 'askquestion' %}" method="post">
             {% csrf_token %}
             {{ askform|crispy }}

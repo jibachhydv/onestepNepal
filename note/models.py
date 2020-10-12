@@ -86,8 +86,7 @@ class Note(models.Model):
 
     # Views Count
     views = models.PositiveIntegerField(blank=False, default=0)
-
-
+    
     # Likes 
     likes = models.ManyToManyField(User, related_name='likedpost', blank=True)
 

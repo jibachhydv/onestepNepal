@@ -14,4 +14,14 @@ urlpatterns = [
 
     # Delete Comment
     path('deletecomment-<int:commentid>/', views.deletecomment, name='deletecomment'),
+
+    # Search Result
+    path('search/', views.searchAll, name='searchAll'),
+
+    # Search Result By Subject
+    path('subject/<str:subject>/', views.searchSubject, name='searchSubject'),
+
+    # Search Result By Grade
+    path('grade/<str:grade>/', views.searchGrade, name='searchGrade'),
+    
 ]

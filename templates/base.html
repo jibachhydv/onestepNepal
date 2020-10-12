@@ -259,8 +259,21 @@
       </div>
     </div> -->
 
+    
+   
+
     <!-- Body Block -->
     {% block body %} 
+
+    <!-- Search Box -->
+    <div class="container mt-4" style="max-width: 600px;">
+      <form action="{% url 'searchAll' %}" >
+        <input class="form-control" required type="text" name='q' name="Search Box">
+        <input name="searchBtn" id="searchBtn" class="btn btn-primary mt-2" type="submit" value="Search">
+      </form>
+    </div>
+
+
     {% endblock body %}
 
     <hr />
