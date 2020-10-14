@@ -40,7 +40,9 @@ def login(request):
                 account_login(request,user)
                 return HttpResponseRedirect(reverse('homepage'))
             else:
-                return HttpResponse("Please Confirm the mail to login")
+                return render(request, 'account/account_not_activated.html' , {
+
+                })
         else:
             return render(request, 'account/login.html', {
                 'error': True
@@ -116,13 +118,16 @@ def signup(request):
         # photo = request.POST['profilePicture']
         
         # Ensure that password matches
-
-        if len(password1) <= 8:
-            return HttpResponse("Too Small Password")
-
+        if len(password1) < 8 or len(password2) < 8:
+            return render(request, 'registration/signup.html', {
+                "error_message": "Password cannot be shorter than 8 digits"
+            })
 
         if password1 != password2:
-            return HttpResponse("Password not match")
+            return render(request, 'registration/signup.html', {
+                "error_message": "Passwords don't match",
+            })
+
         
         # Attempt to create a new user
         try:
@@ -140,7 +145,9 @@ def signup(request):
             
         except IntegrityError as e:
             print(e)
-            return HttpResponse("Email address already taken")
+            return render(request, 'registration/signup.html', {
+                "error_message": "Email Address Already Taken"
+            })
         
         current_site = get_current_site(request)
         mail_subject = 'Activate your account.'
@@ -155,7 +162,9 @@ def signup(request):
             mail_subject, message, to=[to_email]
         )
         email.send()
-        return HttpResponse('Please Confirm your email address to complete the registration')
+        return render(request, 'account/account_confirmation.html', {
+
+        })
 
 UserModel = get_user_model()
 
@@ -168,6 +177,6 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'account/account_confirmed.html')
     else:
         return HttpResponse('Activation link is invalid!')

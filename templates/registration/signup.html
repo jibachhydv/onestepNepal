@@ -68,6 +68,15 @@
   </form> -->
 
   <!-- Sign up Form -->
+
+  <div style="color: red;">
+    {% if error_message %}
+        {{ error_message }}
+    {% endif %}
+  </div>
+
+  
+
   <form class="mt-5" action="{% url 'signup' %}" method="POST">
 
     {% csrf_token %}
@@ -76,12 +85,12 @@
 
       <div class="col-12 col-md-6">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" name="firstName" placeholder="First name" />
+        <input type="text" class="form-control" name="firstName" placeholder="First name" required />
       </div>
 
       <div class="col-12 col-md-6">
           <label for="lastName">Last Name</label>
-        <input type="text" name="lastName" class="form-control" placeholder="Last name" />
+        <input type="text" name="lastName" class="form-control" placeholder="Last name" required />
       </div>
     </div>
 
@@ -93,6 +102,7 @@
         name="email"
         id="email"
         aria-describedby="emailHelp"
+        required
       />
       <small id="emailHelp" class="form-text text-muted"
         >We'll never share your email with anyone else.</small
@@ -102,12 +112,12 @@
     <div class="row">
       <div class="col-12 col-md-6">
         <label for="password1">Password</label>
-        <input type="password" class="form-control" name="password1" placeholder="Password" />
+        <input type="password" class="form-control" required name="password1" placeholder="Password" />
       </div>
 
       <div class="col-12 col-md-6">
         <label for="password2">Confirm Password</label>
-        <input type="password" name="password2" class="form-control" placeholder="Confirm password" />
+        <input type="password" name="password2" required class="form-control" placeholder="Confirm password" />
       </div>
     </div>
 
@@ -120,7 +130,7 @@
 
       <div class="col-12 col-md-6">
           <label for="username">Username</label>
-        <input type="text" name="username" class="form-control" placeholder="User Name" />
+        <input type="text" name="username" class="form-control" required placeholder="User Name" />
       </div>
     </div>
 
