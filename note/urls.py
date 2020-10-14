@@ -23,5 +23,5 @@ urlpatterns = [
 
     # Search Result By Grade
     path('grade/<str:grade>/', views.searchGrade, name='searchGrade'),
-    
+
 ]

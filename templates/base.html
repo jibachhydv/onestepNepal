@@ -9,6 +9,15 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Title Bar Image -->
+    <link
+      rel="shortcut icon"
+      href="{% static "images/logo.png" %}"
+      type="image/x-icon"
+    />
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -21,317 +30,210 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
 
     <!-- Title Block -->
-    <title>{% block title %} Home Page {% endblock title %}</title>
+    <title>{% block title %}One Step Nepal{% endblock title %}</title>
   </head>
   <body>
     <!-- Top Bar -->
-
-    <!-- Logo, Sign In, Create -->
-    <div class="d-flex" style="background-color: palegoldenrod">
-      <div class="m-2">
-        <a href="#">
-          One Step For
-          <img
-            width="30"
-            height="30"
-            src="{% static 'images/Flag_of_Nepal.png' %}"
-            alt="Nepal"
-          />
-        </a>
-      </div>
-      <div class="ml-auto m-2">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary btn-sm dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            name="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Create
-          </button>
-          <div
-            class="dropdown-menu dropdown-menu-right"
-            aria-labelledby="dropdownMenuButton"
-          >
-            <a class="dropdown-item" href="{% url 'newnote' %}">Note</a>
-            <a class="dropdown-item" href="{% url 'askquestion' %}"
-              >Ask Question</a
-            >
-          </div>
+    <div class="top-bar">
+      <div class="intro-sign">
+        <div class="company-logo">
+          <img src="{% static 'images/logo.svg' %}" class="flag" alt="" />
         </div>
-      </div>
-      <div class="m-2">
-        {% if user.is_authenticated %}
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary btn-sm dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Profile
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">{{ user.first_name }}</a>
-            <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        <div class="search" style="font-size: 24px; line-height: 20px">
+          <i class="fa fa-search"></i>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <div class="sign-in-create">
+          <div class="create-account circle-effect">
+            <a href="{% url 'signup' %}" style="text-decoration: none; color: white;">
+              Create Account
+            </a>
+          </div>
+          <div class="sign-in circle-effect">
+            <a href="{% url 'login' %}" style="text-decoration: none; color: white;">
+              Sign In
+            </a>
           </div>
         </div>
         {% else %}
-        <a href="{% url 'login' %}">Sign In</a>
-        <a href="{% url 'signup' %}">Sign Up</a>
+          Logged In As {{ request.user.fullname }}
         {% endif %}
+
       </div>
-    </div>
-
-    <!-- Nav Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <!-- Branding -->
-      <a href="#" class="navbar-brand">
-        <!-- Image of Nepal -->
-        <img
-          width="30"
-          height="30"
-          src="{% static 'images/Flag_of_Nepal.png' %}"
-          alt=""
-        />
-        One Step
-      </a>
-
-      <!-- Toggle Button -->
-      <button
-        type="button"
-        class="navbar-toggler"
-        data-toggle="collapse"
-        data-target="#mymenu"
-      >
-        <span class="navbar-toggler-icon"> </span>
-      </button>
-
-      <!-- Nav -->
-      <div class="collapse navbar-collapse" id="mymenu">
-        <ul class="navbar-nav ml-auto">
-          <!-- Home Button -->
-          <li class="nav-item">
-            <a href="{% url 'homepage' %}" class="nav-link"> Home </a>
-          </li>
-
-          <!-- Note Button -->
-          <li class="nav-item">
-            <a href="{% url 'notelist' %}" class="nav-link"> Note </a>
-          </li>
-
-          <!-- Ask Button -->
-          <li class="nav-item">
-            <a href="{% url 'allquestions' %}" class="nav-link"> Ask </a>
-          </li>
-
-          <!-- Flash Card Button -->
-          <!-- <li class="nav-item">
-            <a href="" class="nav-link">
-              Flash Card
-            </a>
-          </li> -->
-
-          <!-- Test Button -->
-          <!-- <li class="nav-item">
-            <a href="" class="nav-link">
-              Test
-            </a>
-          </li> -->
-
-          <!-- Bootcamp Button -->
-          <li class="nav-item">
-            <a href="" class="nav-link"> Boot Camp </a>
-          </li>
-
-          <!-- Meetus Button -->
-          <li class="nav-item">
-            <a href="" class="nav-link"> Meet Us </a>
-          </li>
-
-          <!-- Discussion Button -->
-          <li class="nav-item">
-            <a href="" class="nav-link"> Discusion </a>
-          </li>
-
-          <!-- Read Button -->
-          <li class="nav-item">
-            <a href="" class="nav-link"> Read Nepal </a>
-          </li>
-
-          <!-- Learning Resources Button
-                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Resources
-                    </a>
-                </li> -->
-
-          <!-- Opputunities In Nepal -->
-          <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Oppurtunity
-                    </a>
-                </li> -->
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Classess -->
-    <!-- <div
-      id="classsix"
-      class="d-flex flex-wrap align-content-center justify-content-center position-sticky fixed-top"
-    >
-      <a href="#">
-        Note
-      </a>
-      <a href="#">
-        Question
-      </a>
-      <a href="#">
-        Test
-      </a>
-      <a href="#">
-        Ask
-      </a>
-      <a href="#">
-            Resource
-        </a>
-    </div> -->
-
-    <!-- Recommended Post 2 -->
-    <!-- <div class="container mt-4"> -->
-    <!-- <h3>Book Of the Month</h3>
-        <div class="row">
-            <div class="col d-flex" style="background-color: tomato; height: 300px;">
-
-                <div class="col-6" style="background-color: red; height: 300px;">
-                        <h1>Image</h1>
-                </div>
-
-                <div class="col-6" style="background-color: palegoldenrod; height: 300px;">
-                    <p>Name:</p>
-                    <p>Rating:</p>
-                </div>
-
+      <nav>
+        <div class="navigation-container">
+          <div class="user">
+            <div class="user-photo">
+              <img
+                src="{% static 'images/img.png' %}"
+                alt=""
+                class="user-pic"
+              />
             </div>
-        </div> -->
+            <div class="info">
+              <span class="views">2k views</span>
+              <span class="name">Mr.Kp Oli</span>
+            </div>
+          </div>
+          <div class="navigation nav-total">
+            <ul type="none" class="nav">
+              <a href="{% url 'notelist' %}"
+                ><li>Note<i class="fa fa-hand-paper-o"></i></li
+              ></a>
+              <a href="{% url 'allquestions' %}"
+                ><li>Ask <i class="fa fa-question" aria-hidden="true"></i></li
+              ></a>
+              <a href=""
+                ><li>ReadNepal <!-- <i class="fa fa-group"> --></i></li
+              ></a>
+              
+              <a href=""
+                ><li>Test <i class="fa fa-newspaper-o"></i></li
+              ></a>
 
-    <!-- Recommended Post -->
-    <!-- <h5>Post Of the Day</h5>
-      <div class="row justify-content-center">
-        <div
-          class="col-md-5 m-4"
-          style="background-color: seagreen; height: 200px;"
-        >
-          Post 1 Worth Reading
-        </div>
+              <a href=""
+                ><li>BootCamp <i class="fa fa-fire"></i></li
+              ></a>
 
-        <div
-          class="col-md-5 m-4"
-          style="background-color: teal; height: 200px;"
-        >
-          Post 2 Worth Reading
+              <a href=""
+                ><li>Meet Us <i class="fa fa-fire"></i></li
+              ></a>
+            </ul>
+          </div>
+          <div class="three-bars" onclick="myFunction()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
         </div>
-      </div>
-    </div> -->
-
-    <!-- <h2>Post</h2> -->
-    <!-- <div class="container">
-      <div class="row justify-content-center">
-        <div
-          class="col-md-5 m-4"
-          style="background-color: royalblue; height: 200px;"
-        >
-          FIrst Post
-        </div>
-        <div
-          class="col-md-5 m-4"
-          style="background-color: saddlebrown; height: 200px;"
-        >
-          Second Post
-        </div>
-      </div>
-    </div> -->
-
-    
-   
+      </nav>
+    </div>
 
     <!-- Body Block -->
-    {% block body %} 
+    {% block body %}
 
     <!-- Search Box -->
-    <div class="container mt-4" style="max-width: 600px;">
-      <form action="{% url 'searchAll' %}" >
-        <input class="form-control" required type="text" name='q' name="Search Box">
-        <input name="searchBtn" id="searchBtn" class="btn btn-primary mt-2" type="submit" value="Search">
+    <div class="container mt-4" style="max-width: 600px">
+      <form action="{% url 'searchAll' %}">
+        <input
+          class="form-control"
+          required
+          type="text"
+          name="q"
+          name="Search Box"
+        />
+        <input
+          name="searchBtn"
+          id="searchBtn"
+          class="btn btn-primary mt-2"
+          type="submit"
+          value="Search"
+        />
       </form>
     </div>
-
 
     {% endblock body %}
 
     <hr />
-    
-    
+
     <!-- Footer -->
-    <footer class="container-fluid p-2"  style="background-color: #232729; color: white;">
-      <div class="row">
-
-        <!-- Left Side Space -->
-        <div class="col">
-          
-        </div>
-       
-        <div class="col-6 col-md-3">
-          <div class="d-flex flex-column">
-            One Step Nepal
-            <a href="{% url 'notelist' %}">Note</a>
-            <a href="{% url 'newnote' %}">Create Note</a>
-            <a href="{% url 'allquestions' %}">Questions</a>
-            <a href="{% url 'askquestion' %}">Ask Question</a>
-            <a href="">After SEE</a>
-            <a href="">Learning Resources</a>
-          </div>
-        </div>
-
-        <div class="col-5 col-md-4">
-          <div class="d-flex flex-column">
-            Connect With Us
-            <a href="">Facebook Page</a>
-            <a href="">Facebook Group</a>
-            <a href="">Linkedin</a>
-            <a href="">Instagram</a>
-            <a href="">Twitter</a>
-          </div>
-        </div>
- 
-        <div class="col-md-4">
-          <div class="d-flex flex-column align-items-center align-items-md-start">
-            Company
-            <a href="">About Us</a>
-            <a href="">Motivation</a>
-            <a href="">Team</a>
-            <a href="">Contact Us</a>
-            <a href="">Policy</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-    
-    
-    
-    
 
     <!-- Footer -->
 
     <!-- All the other options -->
-    
+    <footer>
+      <div class="footer">
+        <div class="info-block">
+          <div class="logo">
+            <img src="{% static "images/logo.svg" %}" alt="LearnCodeIn" />
+          </div>
+          <div class="location">
+            <i class="fa fa-map-marker"></i>
+            5<sup>th</sup> Floor, A-118, Sector-136, Noida, Uttar Pradesh
+          </div>
+          <div class="feedback">
+            <i class="fa fa-envelope" aria-hidden="true"></i>feedback@gmail.com
+          </div>
+          <div class="social-sites">
+            <div class="foot-facebook">
+              <i class="fa fa-facebook foot-social" aria-hidden="true"></i>
+            </div>
+            <div class="foot-facebook">
+              <i class="fa fa-instagram foot-social" aria-hidden="true"></i>
+            </div>
+            <div class="foot-facebook">
+              <i class="fa fa-linkedin foot-social" aria-hidden="true"></i>
+            </div>
+            <div class="foot-facebook">
+              <i class="fa fa-twitter foot-social" aria-hidden="true"></i>
+            </div>
+            <div class="foot-facebook">
+              <i class="fa fa-youtube foot-social" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <div class="first-column">
+          <div class="foot-topic">Company</div>
+          <div class="foot-first-subtopic foot-subtopic">
+            <ul type="none" class="suptopics">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html">Careers</a></li>
+              <li><a href="index.html">Privacy Policy</a></li>
+              <li><a href="index.html">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="second-column">
+          <div class="foot-topic">Learn</div>
+          <div class="foot-second-subtopic foot-subtopic">
+            <ul type="none" class="suptopics">
+              <li><a href="index.html">About us</a></li>
+              <li><a href="index.html">Careers</a></li>
+              <li><a href="index.html">Privacy Policy</a></li>
+              <li><a href="index.html">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="third-column">
+          <div class="foot-topic">Practice</div>
+          <div class="foot-third-subtopic foot-subtopic">
+            <ul type="none" class="suptopics">
+              <li><a href="">About us</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">Privacy Policy</a></li>
+              <li><a href="">Contact us</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">How To connect </a></li>
+              <li><a href="">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="fourth-column">
+          <div class="foot-topic">Contribute</div>
+          <div class="foot-fourth-subtopic foot-subtopic">
+            <ul type="none" class="suptopics">
+              <li><a href="">About us</a></li>
+              <li><a href="">Careers</a></li>
+              <li><a href="">Languages </a></li>
+              <li><a href="">Contact us</a></li>
+              <li><a href="">Languages </a></li>
+              <li><a href="">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">@LearnCodeIn All right reserved</div>
+    </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 2000,
+      });
+    </script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -350,4 +252,6 @@
       crossorigin="anonymous"
     ></script>
   </body>
+
+  <script src="https://use.fontawesome.com/299edf00a0.js"></script>
 </html>

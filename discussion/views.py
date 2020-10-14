@@ -122,3 +122,31 @@ def deleteanswer(request, answerid):
         raise Http404("Not allowded")
     answer.delete()
     return redirect(request.META['HTTP_REFERER'])
+
+
+
+# Search Result by Subject
+def searchSubject(request, subject):
+
+    searchQuestion = Discussion.objects.all().filter(
+        subject=subject
+    ).order_by('-views', 'time')
+
+    # Search Result
+    return render(request, 'note/searchresult.html', {
+        'searchNotes': searchQuestion,
+        'query': subject,
+    })
+
+# Search Result by grade
+def searchGrade(request, grade):
+
+    searchQuestion = Discussion.objects.all().filter(
+        grade=grade
+    ).order_by('-views', 'time')
+
+    # Search Result
+    return render(request, 'note/searchresult.html', {
+        'searchNotes': searchQuestion,
+        'query': grade,
+    })
