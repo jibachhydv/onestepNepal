@@ -74,7 +74,7 @@
             </div>
             <div class="info">
               <span class="views">2k views</span>
-              <span class="name">Mr.Kp Oli</span>
+              <span class="name">{{ request.user.fullname }}</span>
             </div>
           </div>
           <div class="navigation nav-total">
@@ -123,6 +123,7 @@
           type="text"
           name="q"
           name="Search Box"
+          placeholder="Search Note, Question ....."
         />
         <input
           name="searchBtn"
@@ -134,15 +135,141 @@
       </form>
     </div>
 
+    <!-- Book of the Month -->
+    <div class="container mt-4" style="max-width: 750px;">
+
+      <div class="row">
+        <h4>
+          Book of the Month
+        </h4>
+      </div>
+
+      <div class="row">
+        <table class="table table-light">
+          <thead>
+            <tr>
+              <td>
+                SN
+              </td>
+              <td>
+                Book Name
+              </td>
+              <td>
+                Participate
+              </td>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>
+                1
+              </td>
+              <td>
+                Educated
+              </td>
+              <td>
+                <button class="btn btn-primary">Participate</button>
+              </td>
+            </tr>
+
+             <tr>
+              <td>
+                1
+              </td>
+              <td>
+                Educated
+              </td>
+              <td>
+                <button class="btn btn-primary">Participate</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Recoommended Post -->
+    <div class="container mt-4" style="max-width: 750px;">
+
+      <div class="row">
+        <h4>
+          Recommended Notes
+        </h4>
+      </div>
+
+      <div class="row"> 
+        {% for note in recommendedNotes %}
+        <div class="col-12 col-sm-6
+         mt-4">
+          <div class="card border-primary mb-3">
+            <div class="card-body">
+              <a href="{% url 'notedetail' note.pk note.slug %}" style="color: #c52929">
+                {{ note.title }}
+              </a>
+    
+              <br />
+              <span style="color: #c52929">
+                <a href="{% url 'searchSubject' note.subject %}"> #{{ note.subject }} </a>
+              </span>
+    
+              <span style="color: #c52929">
+                <a href="{% url 'searchGrade' note.grade %}"> #{{ note.grade }} </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+
+    <!-- Reccommended Questions -->
+    <div class="container mt-5" style="max-width: 750px;">
+
+      <div class="row">
+        <h4>
+          Recommended Questions
+        </h4>
+      </div>
+
+       <div class="row">
+        {% for question in recommendedQuestion %}
+        <div class="col-12 col-sm-6 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'questiondetail' question.id question.slug %}" style="color: #c52929;">
+                        {{ question.title }}
+                    </a>
+
+                    <br>
+                    <span style="color: #c52929;">
+                        <a href="{% url 'searchSubjectDiscussion' question.subject %}">
+                            #{{ question.subject }}
+                        </a>
+                    </span>
+
+                    <span style="color: #c52929;">
+                        <a href="{% url 'searchGradeDiscussion' question.grade %}">
+                            #{{ question.grade }}
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+       {% endfor %}
+    </div>
+    </div>
     {% endblock body %}
 
     <hr />
 
     <!-- Footer -->
 
-    <!-- Footer -->
-
-    <!-- All the other options -->
     <footer>
       <div class="footer">
         <div class="info-block">
