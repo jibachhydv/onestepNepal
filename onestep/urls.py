@@ -16,7 +16,7 @@ urlpatterns = [
     path('ask/', include('discussion.urls')),
 
     # Extra App
-    path('readnepal/', include('extrapp.urls')),
+    path('onestep/', include('extrapp.urls')),
 
 
     # Django Summer Not

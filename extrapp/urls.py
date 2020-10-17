@@ -6,4 +6,5 @@ urlpatterns = [
 
     # Read Nepal
     path('', views.readNepal, name='readnepal'),
+    path('test/', views.testHomePage, name='testPage'),
 ]

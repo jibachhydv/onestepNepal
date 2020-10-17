@@ -8,3 +8,8 @@ def readNepal(request):
     return render(request, 'readNepal/readnepal.html', {
         
     })
+
+def testHomePage(request):
+    return render(request, 'test/test.html', {
+        
+    })
