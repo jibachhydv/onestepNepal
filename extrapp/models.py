@@ -15,51 +15,30 @@ class CurrentBook(models.Model):
     summary = models.TextField(max_length=1000)
 
     # CoverImage of the Book
-    coverImage = models.ImageField(verbose_name='Book Cover Image', upload_to='readnepal')
+    coverImage = models.ImageField(verbose_name='Book Cover Image', upload_to='readnepal', null=True)
 
     # Date
     date = models.DateField()
 
     # isItCurrentBook
-    isItCurrentBook = models.BooleanField(verbose_name='Is this a Book of Month')
+    isItCurrentBook = models.BooleanField(verbose_name='Is this a Book of Month', default=False)
 
     def __str__(self):
-        return self.name
-    
+        return f"{self.name} {self.date}"
 
-    
+class Participiant(models.Model):
 
-class OtherBook(models.Model):
+    # participiant Name
+    reader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reader')
 
     # Book Name
-    name = models.CharField(verbose_name='Book Name', max_length=200)
+    bookName = models.ForeignKey(CurrentBook, on_delete=models.CASCADE, related_name='bookName')
 
-    # participated By
-    participatedBy = models.ForeignKey(User, related_name='participatedByOther', on_delete=models.CASCADE)
+    # Date 
+    dateStarted = models.DateField(auto_now_add=True)
 
-    # status
-    status = models.BooleanField(verbose_name='Do You Completed Reading?')
-
-    # month
-    status = models.DateField()
+    # Mark as done
+    doneReading = models.BooleanField(verbose_name="Done Reading Book?", default=False)
 
     def __str__(self):
-        return f'{self.participatedBy} is reading {self.name}'
-
-class ReadNepalParticipant(models.Model):
-    
-    # Reader Name
-    readerName = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookreader')
-
-    # Date Joined
-    dateJoined = models.DateTimeField(verbose_name='Reader Joined Date', auto_now=True)
-
-    # Book Name
-    bookName = models.ForeignKey(CurrentBook, on_delete=models.CASCADE, related_name='booksName')
-
-    # Complete Reading
-    readingStatus = models.BooleanField(verbose_name='Have you completed Reading')
-
-    def __str__(self):
-        return f"{self.readerName} is reading {self.bookName}"
-
+        return f"{self.reader.email} is reading {self.bookName.name}"
