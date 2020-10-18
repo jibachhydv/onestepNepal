@@ -3,13 +3,14 @@
 
 {% block body %}
 
-<div class="container" style="max-width: ">
+
+<div class="container" style="max-width: 750px">
   <div class="row">
     <h1 class="ml-auto mr-auto">Read Nepal</h1>
   </div>
 
   <div class="row">
-    <h1 class="ml-auto mr-auto">Book of the Month</h1>
+    <h1 class="ml-auto mr-auto">Book of the Month {{ monthName }}</h1>
   </div>
 
   <div class="row mt-4">
@@ -49,6 +50,10 @@
         </button>
       </div>
     </div>
+    {% empty %}
+      <h1>
+        No Book Added. Will be Added Soon
+      </h1>
     {% endfor %}
     </div>
 </div>
@@ -85,24 +90,18 @@
           </tr>
         </thead>
         <tbody>
+          {% for reader in readers %}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ reader.reader.first_name }}</td>
+            <td>{{ reader.bookName.name }}</td>
+            {% if reader.doneReading %}
+              <td style="color: rgb(238, 109, 24);">Finished Reading</td>
+            {% else %}
+              <td>Currently Reading</td>
+            {% endif %}
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
