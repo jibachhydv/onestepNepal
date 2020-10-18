@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from .models import CurrentBook, Participiant
+from django.http import HttpResponseRedirect
 
 from datetime import datetime
 import calendar
@@ -24,6 +25,8 @@ def readNepal(request):
       'readers': participiants,
     })
 
+
+
 def testHomePage(request):
     return render(request, 'test/test.html', {
         
@@ -31,3 +34,23 @@ def testHomePage(request):
 
 
 # Add Book
+@login_required
+def addBook(request):
+
+  if request.method == "POST":
+    # Reader name
+    reader = request.user
+
+    # book 
+    book = CurrentBook.objects.get(id=request.POST['bookId'])
+
+    # Add Participiant
+    Participiant.objects.create(reader=reader, bookName=book, dateStarted=datetime.now(), doneReading=False)
+
+    book.reader.add(request.user)
+    
+    # Redirect to the same page
+    return redirect(request.META['HTTP_REFERER'])
+
+  else:
+    return HttpResponseRedirect(reverse('homepage'))

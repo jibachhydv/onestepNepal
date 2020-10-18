@@ -20,6 +20,9 @@ class CurrentBook(models.Model):
     # Date
     date = models.DateField()
 
+    # Reader
+    reader = models.ManyToManyField(to=User, blank=True, related_name='books')
+
     # isItCurrentBook
     isItCurrentBook = models.BooleanField(verbose_name='Is this a Book of Month', default=False)
 
@@ -39,6 +42,9 @@ class Participiant(models.Model):
 
     # Mark as done
     doneReading = models.BooleanField(verbose_name="Done Reading Book?", default=False)
+
+    class Meta:
+        unique_together = ('reader', 'bookName')
 
     def __str__(self):
         return f"{self.reader.email} is reading {self.bookName.name}"

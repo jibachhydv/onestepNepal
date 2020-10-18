@@ -62,10 +62,11 @@
           
       <nav>
         <div class="navigation-container">
+          {% if request.user.is_authenticated %}
           <div class="user">
             <div class="user-photo">
               <img
-                src="{% static 'images/img.png' %}"
+                src="{{ request.user.photo.url }}"
                 alt=""
                 class="user-pic"
               />
@@ -75,6 +76,21 @@
               <span class="name">{{ request.user.fullname }}</span>
             </div>
           </div>
+          {% else %}
+          <div class="user">
+            <div class="user-photo">
+              <img
+                src="{% static 'images/img.png' %}"
+                alt=""
+                class="user-pic"
+              />
+            </div>
+            <div class="info">
+              <span class="views">0 views</span>
+              <span class="name">Not Signed In</span>
+            </div>
+          </div>
+          {% endif %}
           <div class="navigation nav-total">
             <ul type="none" class="nav">
               <a href="{% url 'notelist' %}"
@@ -159,31 +175,29 @@
           </thead>
 
           <tbody>
-
-            <tr>
-              <td>
-                1
-              </td>
-              <td>
-                Educated
-              </td>
-              <td>
-                <button class="btn btn-primary">Participate</button>
-              </td>
-            </tr>
-
-             <tr>
-              <td>
-                1
-              </td>
-              <td>
-                Educated
-              </td>
-              <td>
-                <button class="btn btn-primary">Participate</button>
-              </td>
-            </tr>
-
+            {% for book in books %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>
+                  {{ book.name }}
+                </td>
+                <td>
+                {% if request.user in book.reader.all %}
+                      <!-- Still Reading -->
+                      <button class="btn btn-success btn-sm">Marks as done</button>
+                      <!-- Complete Reading -->
+                {% else %}
+                  <form action="{% url 'addbook' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{ book.id }}" name='bookId'>
+                      <button class="btn btn-primary btn-sm" type="submit">Participate</button>
+                    </form>
+                {% endif %}
+                </td>
+              </tr>      
+            {% endfor %}
           </tbody>
         </table>
       </div>

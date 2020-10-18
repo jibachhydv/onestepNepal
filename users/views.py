@@ -23,7 +23,9 @@ from django.contrib.auth import get_user_model
 
 from note.models import *
 from discussion.models import Discussion
-# from .forms import SignUpForm
+from extrapp.models import *
+
+from datetime import datetime
 
 
 def homepage(request):
@@ -40,9 +42,18 @@ def homepage(request):
     recQuestions = Discussion.objects.all().exclude(answered_status=True)[:4]
     print(recQuestions)
 
+
+     # Current Month of the Year
+    currentMonth = datetime.now().month
+
+    # Book Of the Month
+    bookOfTheMonth = CurrentBook.objects.all().filter(date__month=currentMonth).filter(isItCurrentBook=True)[:2]
+
     return render(request, 'base.html', {
         'recommendedNotes': recNotes,
         'recommendedQuestion': recQuestions,
+        'books': bookOfTheMonth,
+        # 'doneReading': doneReading(request.user, bookOfTheMonth)
     })
 
 
